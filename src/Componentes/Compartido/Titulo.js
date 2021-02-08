@@ -8,7 +8,7 @@ export default class Titulo extends Component {
         } else titulo = <h1 className="p-2 bd-highlight mb-0">{this.props.titulo}</h1>;
         if (this.props.lugar) {
             var boton = <h1 className="p-2 pr-3 mr-0 mt-2 bd-highlight btn btn-success text-center font-weight-bold">+ Agregar {this.props.lugar}</h1>
-        } else boton = <></>;
+        } else boton = <div style={{height: "58px"}}></div>;
         return (
             <div className="d-flex flex-container p-2 px-xl-5 px-lg-4 px-md-3 align-items-center" style={{backgroundColor: "#bfe5c7"}}>
                 {titulo}
