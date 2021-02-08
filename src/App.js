@@ -5,6 +5,7 @@ import Plantas from "./Componentes/Plantas";
 import Jardines from './Componentes/Jardines';
 import Dispositivos from './Componentes/Dispositivos';
 import Jardin from './Componentes/Jardin';
+import Area from './Componentes/Area';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/Plantas' exact children={<Plantas/>}/>
           <Route path='/Dispositivos' exact children={<Dispositivos/>}/>
           <Route path='/Jardin' exact children={<Jardin/>}/>
+          <Route path='/Area' exact children={<Area/>}/>
         </>
       </Switch>
     </Router>

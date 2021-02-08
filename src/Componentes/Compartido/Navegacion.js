@@ -4,7 +4,7 @@ import Link from "react-router-dom/Link";
 export default class Navegacion extends Component {
     render() {
         return (
-            <nav className="navbar navbar-expand-lg navbar-dark" style={{backgroundColor: "#186429"}}>
+            <nav className="navbar navbar-expand-lg navbar-dark sticky-top" style={{backgroundColor: "#186429"}}>
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">SmartGarden</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
