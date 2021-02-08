@@ -11,7 +11,9 @@ export default class Plantas extends Component {
                 <Titulo link="/Jardin" titulo="🠔 Área 1" desc="Patio principal"/>
                 <Subtitulo subtitulo="Datos" p="1em"/>
                 <Datos alertas="⚠ 2" temp="-7 °C" hum="5%" luz="⚪"/>
-                <Subtitulo subtitulo="Plantas"/>
+                <div className="container-fluid">
+                    <Subtitulo subtitulo="Plantas" lugar="planta"/>
+                </div>
                 <div className="container p-4">
                    <Tarjeta titulo="Rosas" desc="Rosa silvestre" temp="-7 °C  —  27 °C" hum="5%  —  25%" luz="⚪  —  ⚫"/> 
                    <Tarjeta titulo="Rosas" desc="Rosa silvestre" temp="-7 °C  —  27 °C" hum="5%  —  25%" luz="⚪  —  ⚫"/> 
