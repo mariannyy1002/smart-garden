@@ -7,7 +7,7 @@ export default class Jardines extends Component {
     render() {
         return (
             <>
-                <Titulo titulo="Mis jardínes" lugar="jardín" alertas="# 1"/>
+                <Titulo titulo="Mis jardínes" lugar="jardín" alertas=" ⚠ 1"/>
                 <div className="container p-4">
                     <Link to="/Jardin"><Tarjeta titulo="Mi jardín 1" desc="Jardín superior" alertas="# 1"/></Link>
                     <Link to="/Jardin"><Tarjeta titulo="Mi jardín 2" desc="Jardín inferior" alertas="# 0"/></Link> 
