@@ -13,14 +13,14 @@ const listaAreas = [
     { "idJ": 3, "idA": 2, "titulo": "Área 2", "desc": "Corral 3", "alertas": 1, "temp": 17, "hum": 50, "luz": "⚪" }
 ]
 const listaPlantas = [
-    { "idJ": 1, "idA": 1, "idP": 1, "titulo": "Rosa", "desc": "Planta 1", "tempMin": -7, "tempMax": 27,"humMin": 5, "humMax": 50, "luzMin": "⚫", "luzMax": "⚪" },
-    { "idJ": 1, "idA": 1, "idP": 2, "titulo": "Lirio", "desc": "Planta 2", "tempMin": 10, "tempMax": 30,"humMin": 10, "humMax": 30, "luzMin": "⚫", "luzMax": "⚪" },
-    { "idJ": 2, "idA": 1, "idP": 3, "titulo": "Margarita", "desc": "Planta 3", "tempMin": 20, "tempMax": 30,"humMin": 30, "humMax": 40, "luzMin": "⚫", "luzMax": "⚪" },
-    { "idJ": 2, "idA": 1, "idP": 4, "titulo": "Alcatraz", "desc": "Planta 4", "tempMin": 30, "tempMax": 40,"humMin": 50, "humMax": 80, "luzMin": "⚫", "luzMax": "⚪" },
-    { "idJ": 3, "idA": 1, "idP": 1, "titulo": "Rosa", "desc": "Planta 1", "tempMin": -7, "tempMax": 27,"humMin": 5, "humMax": 50, "luzMin": "⚫", "luzMax": "⚪" },
-    { "idJ": 3, "idA": 1, "idP": 2, "titulo": "Lirio", "desc": "Planta 2", "tempMin": 10, "tempMax": 30,"humMin": 10, "humMax": 30, "luzMin": "⚫", "luzMax": "⚪" },
-    { "idJ": 3, "idA": 2, "idP": 3, "titulo": "Margarita", "desc": "Planta 3", "tempMin": 20, "tempMax": 30,"humMin": 10, "humMax": 40, "luzMin": "⚫", "luzMax": "⚪" },
-    { "idJ": 3, "idA": 2, "idP": 4, "titulo": "Alcatraz", "desc": "Planta 4", "tempMin": 30, "tempMax": 40,"humMin": 50, "humMax": 80, "luzMin": "⚫", "luzMax": "⚪" }
+    { "idJ": 1, "idA": 1, "idP": 1, "titulo": "Rosa", "desc": "Planta 1", "tempMin": -7, "tempMax": 27,"humMin": 5, "humMax": 50, "luzMin": "⚫", "luzMax": "⚪", "alertas": 0 },
+    { "idJ": 1, "idA": 1, "idP": 2, "titulo": "Lirio", "desc": "Planta 2", "tempMin": 10, "tempMax": 30,"humMin": 10, "humMax": 30, "luzMin": "⚫", "luzMax": "⚪", "alertas": 1 },
+    { "idJ": 2, "idA": 1, "idP": 3, "titulo": "Margarita", "desc": "Planta 3", "tempMin": 20, "tempMax": 30,"humMin": 30, "humMax": 40, "luzMin": "⚫", "luzMax": "⚪", "alertas": 0 },
+    { "idJ": 2, "idA": 1, "idP": 4, "titulo": "Alcatraz", "desc": "Planta 4", "tempMin": 30, "tempMax": 40,"humMin": 50, "humMax": 80, "luzMin": "⚫", "luzMax": "⚪", "alertas": 0 },
+    { "idJ": 3, "idA": 1, "idP": 1, "titulo": "Rosa", "desc": "Planta 1", "tempMin": -7, "tempMax": 27,"humMin": 5, "humMax": 50, "luzMin": "⚫", "luzMax": "⚪", "alertas": 1 },
+    { "idJ": 3, "idA": 1, "idP": 2, "titulo": "Lirio", "desc": "Planta 2", "tempMin": 10, "tempMax": 30,"humMin": 10, "humMax": 30, "luzMin": "⚫", "luzMax": "⚪", "alertas": 1 },
+    { "idJ": 3, "idA": 2, "idP": 3, "titulo": "Margarita", "desc": "Planta 3", "tempMin": 20, "tempMax": 30,"humMin": 10, "humMax": 40, "luzMin": "⚫", "luzMax": "⚪", "alertas": 1 },
+    { "idJ": 3, "idA": 2, "idP": 4, "titulo": "Alcatraz", "desc": "Planta 4", "tempMin": 30, "tempMax": 40,"humMin": 50, "humMax": 80, "luzMin": "⚫", "luzMax": "⚪", "alertas": 0 }
 ]
 
 export class Area extends Component {
@@ -75,7 +75,7 @@ export class Area extends Component {
                 <div className="container p-4">
                     <Encabezado titulo="seedling" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.plantas.map(item => (
-                        <Tarjeta titulo={item.titulo} desc={item.desc} temp={item.tempMin + " °C  —  " + item.tempMax + " °C"} hum={item.humMin + "%  —  " + item.humMax + "%"} luz={item.luzMin + "  —  " + item.luzMax}/>
+                        <Tarjeta titulo={item.titulo} desc={item.desc} alertas={item.alertas} temp={item.tempMin + " °C  —  " + item.tempMax + " °C"} hum={item.humMin + "%  —  " + item.humMax + "%"} luz={item.luzMin + "  —  " + item.luzMax}/>
                     ))}
                    {/*<Tarjeta titulo="Rosas" desc="Rosa silvestre" temp="-7 °C  —  27 °C" hum="5%  —  25%" luz="⚪  —  ⚫"/> 
                    <Tarjeta titulo="Rosas" desc="Rosa silvestre" temp="-7 °C  —  27 °C" hum="5%  —  25%" luz="⚪  —  ⚫"/> 
