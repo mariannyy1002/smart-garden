@@ -4,15 +4,16 @@ import Titulo from './Compartido/Titulo';
 import Link from 'react-router-dom/Link';
 import { withRouter } from 'react-router-dom';
 
+const listaJardines = [
+    { "id": 1, "titulo": "Mi jardín 1", "desc": "Jardín superior", "alertas": 1 },
+    { "id": 2, "titulo": "Mi jardín 2", "desc": "Jardín inferior", "alertas": 0 },
+    { "id": 3, "titulo": "Mi jardín 3", "desc": "Jardín principal", "alertas": 3 }
+]
+var total = 0;
+listaJardines.map(item => total = total + item.alertas);
+
 export class Jardines extends Component {
     render() {
-        const listaJardines = [
-            { "id": 1, "titulo": "Mi jardín 1", "desc": "Jardín superior", "alertas": 1 },
-            { "id": 2, "titulo": "Mi jardín 2", "desc": "Jardín inferior", "alertas": 0 },
-            { "id": 3, "titulo": "Mi jardín 3", "desc": "Jardín principal", "alertas": 3 }
-        ]
-        var total = 0;
-        listaJardines.map(item => total = total + item.alertas);
         return (
             <>
                 <Titulo titulo="Mis jardínes" lugar="jardín" alertas={"⚠ " + total}/>
