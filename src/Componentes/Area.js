@@ -3,6 +3,7 @@ import Tarjeta from './Compartido/Tarjeta';
 import Titulo from './Compartido/Titulo';
 import Subtitulo from './Compartido/Subtitulo';
 import Datos from './Datos';
+import Encabezado from './Compartido/Encabezado';
 import { withRouter } from 'react-router-dom';
 
 const listaAreas = [
@@ -67,11 +68,12 @@ export class Area extends Component {
             <>
                 <Titulo link={"/Jardin/" + this.props.match.params.idJ } titulo={"🠔 " + this.state.titulo} desc={this.state.desc}/>
                 <Subtitulo subtitulo="Datos" p="1em"/>
-                <Datos alertas={"⚠ " + this.state.alertas} temp={this.state.temp + " °C"} hum={this.state.hum + "%"} luz={this.state.luz}/>
+                <Datos alertas={this.state.alertas} temp={this.state.temp + " °C"} hum={this.state.hum + "%"} luz={this.state.luz}/>
                 <div className="container-fluid">
                     <Subtitulo subtitulo="Plantas" lugar="planta"/>
                 </div>
                 <div className="container p-4">
+                    <Encabezado titulo="seedling" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.plantas.map(item => (
                         <Tarjeta titulo={item.titulo} desc={item.desc} temp={item.tempMin + " °C  —  " + item.tempMax + " °C"} hum={item.humMin + "%  —  " + item.humMax + "%"} luz={item.luzMin + "  —  " + item.luzMax}/>
                     ))}

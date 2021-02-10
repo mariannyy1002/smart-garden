@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Encabezado from './Compartido/Encabezado';
 import Tarjeta from './Compartido/Tarjeta';
 import Titulo from './Compartido/Titulo';
 
@@ -15,6 +16,7 @@ export default class Plantas extends Component {
             <>
                 <Titulo titulo="Mis plantas" lugar="planta"/>
                 <div className="container p-4">
+                    <Encabezado titulo="seedling" desc="info" temp="temperature-high" hum="tint" luz="sun"/>
                     {listaPlantas.map(item => (
                         <Tarjeta titulo={item.titulo} desc={item.desc} temp={item.tempMin + " °C  —  " + item.tempMax + " °C"} hum={item.humMin + "%  —  " + item.humMax + "%"} luz={item.luzMin + "  —  " + item.luzMax}/>
                     ))}

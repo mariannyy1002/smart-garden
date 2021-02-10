@@ -3,6 +3,7 @@ import Tarjeta from './Compartido/Tarjeta';
 import Titulo from './Compartido/Titulo';
 import Link from 'react-router-dom/Link';
 import { withRouter } from 'react-router-dom';
+import Encabezado from './Compartido/Encabezado';
 
 const listaJardines = [
     { "id": 1, "titulo": "Mi jardín 1", "desc": "Jardín superior", "alertas": 1 },
@@ -55,6 +56,7 @@ export class Jardin extends Component {
             <>
                 <Titulo link="/Jardines" titulo={"🠔 " + this.state.titulo} desc={this.state.desc} lugar="área" alertas={"⚠ " + this.state.alertas}/>
                 <div className="container p-4">
+                    <Encabezado titulo="map-marker-alt" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.areas.map(item => (
                         <Link to={"/Area/" + item.idJ + "/" + item.idA} className="link">
                             <Tarjeta titulo={item.titulo} desc={item.desc} alertas={"⚠ " + item.alertas} temp={item.temp + " °C"} hum={item.hum + "%"} luz={item.luz}/>

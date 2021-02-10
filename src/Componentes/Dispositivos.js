@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Encabezado from './Compartido/Encabezado';
 import Tarjeta from './Compartido/Tarjeta';
 import Titulo from './Compartido/Titulo';
 
@@ -14,6 +15,7 @@ export default class Dispositivos extends Component {
             <>
                 <Titulo titulo="Mis dispositivos" lugar="dispositivo"/>
                 <div className="container p-4">
+                    <Encabezado titulo="satellite-dish" desc="info" temp="temperature-high" hum="tint" luz="sun"/>
                     {listaDisp.map(item => (
                         <Tarjeta titulo={item.titulo} desc={item.desc} temp={item.temp + " °C"} hum={item.hum + "%"} luz={item.luz}/> 
                     ))}
