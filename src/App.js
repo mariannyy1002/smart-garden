@@ -17,8 +17,8 @@ function App() {
           <Route path='/Jardines' exact children={<Jardines/>}/>
           <Route path='/Plantas' exact children={<Plantas/>}/>
           <Route path='/Dispositivos' exact children={<Dispositivos/>}/>
-          <Route path='/Jardin' exact children={<Jardin/>}/>
-          <Route path='/Area' exact children={<Area/>}/>
+          <Route path='/Jardin/:id' children={<Jardin/>}/>
+          <Route path='/Area/:idJ/:idA' children={<Area/>}/>
         </>
       </Switch>
     </Router>
