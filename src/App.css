@@ -2,24 +2,24 @@ h1 { font-size: 30px; }
 .ml-6 { margin-left: 4.5rem; }
 .link:hover { text-decoration: none; }
 
-.btn-secondary {
+.btn-warning {
     color: white;
     background-color: #50ab65;
     border-radius: .25rem;
     border-color: #50ab65;
   }
   
-  .btn-secondary:hover {
+  .btn-warning:hover {
     box-shadow: inset 0 0 0 20rem #347743;
   }
   
-  .btn-secondary:active {
+  .btn-warning:active {
     box-shadow: inset 0 0 0 20rem #347743,
       inset 0 3px 4px 0 #347743,
       0 0 1px #347743;
   }
   
-  .btn-secondary:disabled,
-  .btn-secondary.is-disabled {
+  .btn-warning:disabled,
+  .btn-warning.is-disabled {
     opacity: .5;
   }

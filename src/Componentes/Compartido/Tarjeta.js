@@ -4,7 +4,7 @@ export default class Tarjeta extends Component {
     render() {
         return (
             <div className="card text-white mb-2">
-                <div className="d-flex align-items-center p-3 btn btn-secondary">
+                <div className="d-flex align-items-center p-3 btn btn-warning">
                     <h5 className="card-text p-2 col-2 mb-0">{this.props.titulo}</h5>
                     <h6 className="card-text p-2 col-2 mb-0 font-weight-light">{this.props.desc}</h6>
                     <h5 className="card-text p-2 col-2 mb-0 ">{this.props.alertas}</h5>
