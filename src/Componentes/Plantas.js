@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Encabezado from './Compartido/Encabezado';
 import Tarjeta from './Compartido/Tarjeta';
 import Titulo from './Compartido/Titulo';
+import AgregarPlanta from './Modales/AgregarPlanta';
 
 const listaPlantas = [
     { "idP": 1, "titulo": "Rosa", "desc": "Planta 1", "tempMin": -7, "tempMax": 27,"humMin": 5, "humMax": 50, "luzMin": "⚫", "luzMax": "⚪" },
@@ -24,6 +25,7 @@ export default class Plantas extends Component {
                    <Tarjeta titulo="Rosas" desc="Rosa silvestre" temp="-7 °C  —  27 °C" hum="5%  —  25%" luz="⚪  —  ⚫"/> 
                    <Tarjeta titulo="Rosas" desc="Rosa silvestre" temp="-7 °C  —  27 °C" hum="5%  —  25%" luz="⚪  —  ⚫"/>*/}
                 </div>
+                <AgregarPlanta/>
             </>
         )
     }

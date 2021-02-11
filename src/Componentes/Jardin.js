@@ -4,6 +4,7 @@ import Titulo from './Compartido/Titulo';
 import Link from 'react-router-dom/Link';
 import { withRouter } from 'react-router-dom';
 import Encabezado from './Compartido/Encabezado';
+import AgregarArea from './Modales/AgregarArea';
 
 const listaJardines = [
     { "id": 1, "titulo": "Mi jardín 1", "desc": "Jardín superior", "alertas": 1 },
@@ -65,6 +66,7 @@ export class Jardin extends Component {
                    {/*<Link to="/Area" className="link"><Tarjeta titulo="Área 1" desc="Patio principal" alertas="⚠ 2" temp="-7 °C" hum="5%" luz="⚪"/></Link> 
                    <Link to="/Area" className="link"><Tarjeta titulo="Área 2" desc="Corral" alertas="⚠ 1" temp="-7 °C" hum="5%" luz="⚪"/></Link>*/}
                 </div>
+                <AgregarArea/>
             </>
         )
     }
