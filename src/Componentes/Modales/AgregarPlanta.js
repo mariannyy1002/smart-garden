@@ -4,34 +4,44 @@ import CuerpoModal from '../Compartido/Modal/CuerpoModal'
 import EncabezadoModal from '../Compartido/Modal/EncabezadoModal'
 import PieModal from '../Compartido/Modal/PieModal'
 
-/*var s1 = document.getElementById('luzMin');
-var s2 = document.getElementById('luzMax');
-s1.oninput = function(){
-    if (this.value == 1){
-        s1.style.setProperty('--var', 'fas fa-moon');
-        s1.title = "Obscuro";
-        //s1.style.background = '#404040';
-    } else if (this.value == 2){
-        s1.style.setProperty('--var', 'fas fa-circle');
-        s1.title = "Tenue";
-        //s1.style.background = '#666666';
-    } else if (this.value == 3){
-        s1.style.setProperty('--var', 'fas fa-adjust');
-        s1.title = "Normal";
-        //s1.style.background = '#8c8c8c';
-    } else if (this.value == 4){
-        s1.style.setProperty('--var', 'far fa-circle');
-        s1.title = "Brillante";
-        //s1.style.background = '#b3b3b3';
-    } else if (this.value == 5){
-        s1.style.setProperty('--var', 'far fa-sun');
-        s1.title = "Muy brillante";
-        //s1.style.background = '#d9d9d9';
-    }
-}*/
+import { withStyles } from "@material-ui/core/styles";
+import Slider from "@material-ui/core/Slider";
+
+const marks = [
+  { value: 1, label: "Obscuro" },
+  { value: 2, label: "Tenue" },
+  { value: 3, label: "Normal" },
+  { value: 4, label: "Brillante" },
+  { value: 5, label: "Muy brillante" }
+];
+
+function convertValue(num) {
+  switch (num) {
+    case 1: return <i class={'fas fa-moon fa-lg'}></i>;
+    case 2: return <i class={'fas fa-circle fa-lg'}></i>;
+    case 3: return <i class={'fas fa-adjust fa-lg'}></i>;
+    case 4: return <i class={'far fa-circle fa-lg'}></i>;
+    case 5: return <i class={'far fa-sun fa-lg'}></i>;
+  }
+}
+
+const SliderLuz = withStyles({ 
+    root: {color: "#24532e", width: 500, height: 3},
+    valueLabel: { marginTop: "10px", '& *': { background: 'transparent', color: '#24532e'}},
+    rail: { color: '#aaaaaa', opacity: 1}
+})(Slider);
 
 export default class AgregarPlanta extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            value: [2, 4]
+        };
+    }
     render() {
+        const handleChange = (event, newValue) => {
+            this.setState({ value: newValue});
+        };       
         return (
             <Modal>
                 <EncabezadoModal>Agregar planta</EncabezadoModal>
@@ -59,28 +69,16 @@ export default class AgregarPlanta extends Component {
                                 <input className="form-control mb-3" type="number" name="humMax" value="" placeholder="Máxima" value={this.props.searchString} onchange={this.handleChange}></input>
                             </div>
                         </div>
-                        <h6 className="mb-2">Luz</h6>
+                        <h6 className="mb-3">Luz</h6>
                         <div className="row">
-                            <div className="col">
-                                <input type="range" name="luzMin" id="luzMin" min="1" max="5" value="2" title="Tenue" className="slider slider1" required value={this.props.searchString} onchange={this.handleChange}></input>
-                                {/*<select className="form-select mb-3" name="luzMin">
-                                    <option selected>Mínima</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                    <option value="3">Four</option>
-                                </select>*/}
+                            <div className="col text-center">
+                                <SliderLuz value={this.state.value} onChange={handleChange} aria-labelledby="range-slider" valueLabelDisplay="on" min={1} max={5} marks={marks} valueLabelFormat={(value) => <div>{convertValue(value)}</div>}/>
+                                {console.log(this.state.value)}
+                                {/*<input type="range" name="luzMin" id="luzMin" min="1" max="5" value="2" title="Tenue" className="slider slider1" required value={this.props.searchString} onchange={this.handleChange}></input>*/}
                             </div>
-                            <div className="col">
+                            {/*<div className="col">
                                 <input type="range" name="luzMax" id="luzMax" min="1" max="5" value="4" title="Brillante" className="slider slider2" required value={this.props.searchString} onchange={this.handleChange}></input>
-                                {/*<select className="form-select mb-3" name="luzMax">
-                                    <option selected>Máxima</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                    <option value="3">Four</option>
-                                </select>*/}
-                            </div>
+                            </div>*/}
                         </div>
                     </form>   
                 </CuerpoModal>
