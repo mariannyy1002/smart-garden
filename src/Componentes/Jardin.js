@@ -60,7 +60,7 @@ export class Jardin extends Component {
                     <Encabezado titulo="map-marker-alt" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.areas.map(item => (
                         <Link to={"/Area/" + item.idJ + "/" + item.idA} className="link">
-                            <Tarjeta titulo={item.titulo} desc={item.desc} alertas={"⚠ " + item.alertas} temp={item.temp + " °C"} hum={item.hum + "%"} luz={item.luz}/>
+                            <Tarjeta titulo={item.titulo} desc={item.desc} alertas={ item.alertas} temp={item.temp + " °C"} hum={item.hum + "%"} luz={item.luz}/>
                         </Link>
                     ))}
                    {/*<Link to="/Area" className="link"><Tarjeta titulo="Área 1" desc="Patio principal" alertas="⚠ 2" temp="-7 °C" hum="5%" luz="⚪"/></Link> 

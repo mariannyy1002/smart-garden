@@ -23,7 +23,7 @@ export class Jardines extends Component {
                     <Encabezado titulo="tree" desc="info" alertas="exclamation-triangle"/>
                     {listaJardines.map(item => (
                         <Link to={"/Jardin/" + item.id} className="link">
-                            <Tarjeta titulo={item.titulo} desc={item.desc} alertas={"⚠ " + item.alertas}/>
+                            <Tarjeta titulo={item.titulo} desc={item.desc} alertas={item.alertas}/>
                         </Link>
                     ))}
                     {/*<Link to="/Jardin" className="link"><Tarjeta titulo="Mi jardín 1" desc="Jardín superior" alertas="⚠ 1"/></Link>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Encabezado from './Compartido/Encabezado';
 import Tarjeta from './Compartido/Tarjeta';
 import Titulo from './Compartido/Titulo';
+import AgregarDispositivo from './Modales/AgregarDispositivo';
 
 const listaDisp = [
     { "idD": 1, "titulo": "Mi dispositivo 1", "desc": "Jardín superior", "temp": -30,"hum": 25, "luz": "⚪" },
@@ -23,6 +24,7 @@ export default class Dispositivos extends Component {
                    <Tarjeta titulo="Mi dispositivo 2" desc="Jardín inferior" temp="-7 °C" hum="5%" luz="⚪"/> 
                     <Tarjeta titulo="Mi dispositivo 3" desc="Jardín principal" temp="-7 °C" hum="5%" luz="⚪"/>*/}
                 </div>
+                <AgregarDispositivo/>
             </>
         )
     }
