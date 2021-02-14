@@ -1,5 +1,15 @@
 import React, { Component } from 'react'
 
+export function convertValue(num) {
+    switch (num) {
+      case 1: return <i title="Obscuro" class={'fas fa-moon fa-lg'} style={{color: "#212529"}}></i>;
+      case 2: return <i title="Tenue" class={'fas fa-circle fa-lg'} style={{color: "#212529"}}></i>;
+      case 3: return <i title="Normal" class={'fas fa-adjust fa-lg'} style={{color: "#212529"}}></i>;
+      case 4: return <i title="Brillante" class={'far fa-circle fa-lg'} style={{color: "#212529"}}></i>;
+      case 5: return <i title="Muy brillante" class={'far fa-sun fa-lg'} style={{color: "#212529"}}></i>;
+    }
+}
+
 export default class Tarjeta extends Component {
     render() {
         return (

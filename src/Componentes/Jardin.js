@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Tarjeta from './Compartido/Tarjeta';
+import Tarjeta, {convertValue} from './Compartido/Tarjeta';
 import Titulo from './Compartido/Titulo';
 import Link from 'react-router-dom/Link';
 import { withRouter } from 'react-router-dom';
@@ -12,10 +12,10 @@ const listaJardines = [
     { "id": 3, "titulo": "Mi jardín 3", "desc": "Jardín principal", "alertas": 3 }
 ]
 const listaAreas = [
-    { "idJ": 1, "idA": 1, "titulo": "Área 1", "desc": "Corral 1", "alertas": 1, "temp": 17, "hum": 50, "luz": "⚪" },
-    { "idJ": 2, "idA": 1, "titulo": "Área 1", "desc": "Corral 2", "alertas": 0, "temp": 17, "hum": 50, "luz": "⚪" },
-    { "idJ": 3, "idA": 1, "titulo": "Área 1", "desc": "Patio principal", "alertas": 2, "temp": -7, "hum": 5, "luz": "⚪" },
-    { "idJ": 3, "idA": 2, "titulo": "Área 2", "desc": "Corral 3", "alertas": 1, "temp": 17, "hum": 50, "luz": "⚪" }
+    { "idJ": 1, "idA": 1, "titulo": "Área 1", "desc": "Corral 1", "alertas": 1, "temp": 17, "hum": 50, "luz": 1 },
+    { "idJ": 2, "idA": 1, "titulo": "Área 1", "desc": "Corral 2", "alertas": 0, "temp": 17, "hum": 50, "luz": 2 },
+    { "idJ": 3, "idA": 1, "titulo": "Área 1", "desc": "Patio principal", "alertas": 2, "temp": -7, "hum": 5, "luz": 3 },
+    { "idJ": 3, "idA": 2, "titulo": "Área 2", "desc": "Corral 3", "alertas": 1, "temp": 17, "hum": 50, "luz": 4 }
 ]
 
 export class Jardin extends Component {
@@ -53,14 +53,16 @@ export class Jardin extends Component {
         this.mostrarAreas();
     }
     render() {
+        var totalAlertas = "";
+        if (this.state.alertas > 0) totalAlertas = "⚠ " + this.state.alertas;
         return (
             <>
-                <Titulo link="/Jardines" titulo={"🠔 " + this.state.titulo} desc={this.state.desc} lugar="área" alertas={"⚠ " + this.state.alertas}/>
+                <Titulo link="/Jardines" titulo={"🠔 " + this.state.titulo} desc={this.state.desc} lugar="área" alertas={totalAlertas}/>
                 <div className="container p-4">
                     <Encabezado titulo="map-marker-alt" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.areas.map(item => (
                         <Link to={"/Area/" + item.idJ + "/" + item.idA} className="link">
-                            <Tarjeta titulo={item.titulo} desc={item.desc} alertas={ item.alertas} temp={item.temp + " °C"} hum={item.hum + "%"} luz={item.luz}/>
+                            <Tarjeta titulo={item.titulo} desc={item.desc} alertas={ item.alertas} temp={item.temp + " °C"} hum={item.hum + "%"} luz={convertValue(item.luz)}/>
                         </Link>
                     ))}
                    {/*<Link to="/Area" className="link"><Tarjeta titulo="Área 1" desc="Patio principal" alertas="⚠ 2" temp="-7 °C" hum="5%" luz="⚪"/></Link> 

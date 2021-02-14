@@ -11,14 +11,15 @@ const listaJardines = [
     { "id": 2, "titulo": "Mi jardín 2", "desc": "Jardín inferior", "alertas": 0 },
     { "id": 3, "titulo": "Mi jardín 3", "desc": "Jardín principal", "alertas": 3 }
 ]
-var total = 0;
+var total = 0, totalAlertas = "";
 listaJardines.map(item => total = total + item.alertas);
+if (total > 0) totalAlertas = "⚠ " + total;
 
 export class Jardines extends Component {
     render() {
         return (
             <>
-                <Titulo titulo="Mis jardínes" lugar="jardín" alertas={"⚠ " + total}/>
+                <Titulo titulo="Mis jardínes" lugar="jardín" alertas={totalAlertas} ajustes={true}/>
                 <div className="container p-4">
                     <Encabezado titulo="tree" desc="info" alertas="exclamation-triangle"/>
                     {listaJardines.map(item => (

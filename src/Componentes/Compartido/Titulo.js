@@ -9,12 +9,18 @@ export default class Titulo extends Component {
         if (this.props.lugar) {
             var boton = <h1 className="p-2 pr-3 mr-0 mt-2 bd-highlight btn btn-success text-center font-weight-bold" data-bs-toggle="modal" data-bs-target="#modal">+ Agregar {this.props.lugar}</h1>
         } else boton = <div style={{height: "58px"}}></div>;
+        if (this.props.ajustes) {
+            //Ajustes                                                                            !!!!!!!
+            var ajustes = <h1 className="p-0 m-0 mr-2 bd-highlight btn text-center font-weight-bold" style={{fontSize: "35px"}}>⚙️</h1>
+        } else ajustes = <div style={{height: "58px"}}></div>;
         return (
             <div className="d-flex flex-container p-2 px-xl-5 px-lg-4 px-md-3 align-items-center" style={{backgroundColor: "#bfe5c7"}}>
                 {titulo}
                 <h4 className="p-2 bd-highlight font-weight-light mb-0">{this.props.desc}</h4>
                 <h1 className="p-2 flex-grow-1 bd-highlight ml-5 mb-0">{this.props.alertas}</h1>
-                {boton}            
+                {ajustes}
+                {boton}
+                           
             </div>
         )
     }
