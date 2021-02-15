@@ -18,10 +18,10 @@ const marks = [
   function convertValue(num) {
     switch (num) {
       case 1: return <i class={'fas fa-moon fa-lg'}></i>;
-      case 2: return <i class={'fas fa-circle fa-lg'}></i>;
-      case 3: return <i class={'fas fa-adjust fa-lg'}></i>;
-      case 4: return <i class={'far fa-circle fa-lg'}></i>;
-      case 5: return <i class={'far fa-sun fa-lg'}></i>;
+      case 2: return <i class={'fas fa-cloud-moon fa-lg'}></i>;
+      case 3: return <i class={'fas fa-cloud fa-lg'}></i>;
+      case 4: return <i class={'fas fa-cloud-sun fa-lg'}></i>;
+      case 5: return <i class={'fas fa-sun fa-lg'}></i>;
     }
   }
   
