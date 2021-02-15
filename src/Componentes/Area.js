@@ -7,6 +7,7 @@ import Encabezado from './Compartido/Encabezado';
 import { withRouter } from 'react-router-dom';
 import AgregarPlantaArea from './Modales/AgregarPlantaArea';
 import OpcionesArea from './Modales/OpcionesArea';
+import TarjetaPlantaArea from './Modales/TarjetaPlantaArea';
 
 const listaAreas = [
     { "idJ": 1, "idA": 1, "titulo": "Área 1", "desc": "Corral 1", "alertas": 1, "fechaHora": "2021-02-14 19:13:52", "temp": 17, "hum": 50, "luz": 1 },
@@ -70,7 +71,7 @@ export class Area extends Component {
     render() {
         return (
             <>
-                <Titulo link={"/Jardin/" + this.props.match.params.idJ } titulo={"🠔 " + this.state.titulo} desc={this.state.desc} alertas={this.state.alertas} ajustes={true}/>
+                <Titulo link={"/Jardin/" + this.props.match.params.idJ } titulo={[<i className="me-2 fas fa-chevron-left"></i> , this.state.titulo]} desc={this.state.desc} alertas={this.state.alertas} ajustes={true}/>
                 <Subtitulo subtitulo="Datos" p="1.5em" link={"/Historial/"+ this.props.match.params.idJ + "/" + this.props.match.params.idA}/>
                 <div className="container p-4">
                     <Encabezado datos={true}/>
@@ -91,6 +92,7 @@ export class Area extends Component {
                 </div>
                 <AgregarPlantaArea/>
                 <OpcionesArea titulo={this.state.titulo} desc={this.state.desc}/>
+                <TarjetaPlantaArea/>
             </>
         )
     }

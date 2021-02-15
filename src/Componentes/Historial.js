@@ -65,7 +65,7 @@ export class Historial extends Component {
     render() {
         return (
             <>
-                <Titulo link={"/Area/" + this.props.match.params.idJ + "/" + this.props.match.params.idA } titulo={"🠔 " + this.state.titulo} desc={this.state.desc}/>
+                <Titulo link={"/Area/" + this.props.match.params.idJ + "/" + this.props.match.params.idA } titulo={[<i className="me-2 fas fa-chevron-left"></i> , this.state.titulo]} desc={this.state.desc}/>
                 <div className="container p-4">
                     <Encabezado datos={true}/>
                     {this.state.datos.map(item => (

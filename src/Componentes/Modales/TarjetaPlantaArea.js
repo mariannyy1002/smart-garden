@@ -8,30 +8,30 @@ import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 
 const marks = [
-  { value: 1, label: "Obscuro" },
-  { value: 2, label: "Tenue" },
-  { value: 3, label: "Normal" },
-  { value: 4, label: "Brillante" },
-  { value: 5, label: "Muy brillante" }
-];
-
-function convertValue(num) {
-  switch (num) {
-    case 1: return <i class={'fas fa-moon fa-lg'}></i>;
-    case 2: return <i class={'fas fa-cloud-moon fa-lg'}></i>;
-    case 3: return <i class={'fas fa-cloud fa-lg'}></i>;
-    case 4: return <i class={'fas fa-cloud-sun fa-lg'}></i>;
-    case 5: return <i class={'fas fa-sun fa-lg'}></i>;
+    { value: 1, label: "Obscuro" },
+    { value: 2, label: "Tenue" },
+    { value: 3, label: "Normal" },
+    { value: 4, label: "Brillante" },
+    { value: 5, label: "Muy brillante" }
+  ];
+  
+  function convertValue(num) {
+    switch (num) {
+      case 1: return <i class={'fas fa-moon fa-lg'}></i>;
+      case 2: return <i class={'fas fa-circle fa-lg'}></i>;
+      case 3: return <i class={'fas fa-adjust fa-lg'}></i>;
+      case 4: return <i class={'far fa-circle fa-lg'}></i>;
+      case 5: return <i class={'far fa-sun fa-lg'}></i>;
+    }
   }
-}
+  
+  const SliderLuz = withStyles({ 
+      root: {color: "#24532e", width: 500, height: 3},
+      valueLabel: { marginTop: "10px", '& *': { background: 'transparent', color: '#24532e'}},
+      rail: { color: '#aaaaaa', opacity: 1}
+  })(Slider);
 
-const SliderLuz = withStyles({ 
-    root: {color: "#24532e", width: 500, height: 3},
-    valueLabel: { marginTop: "10px", '& *': { background: 'transparent', color: '#24532e'}},
-    rail: { color: '#aaaaaa', opacity: 1}
-})(Slider);
-
-export default class AgregarPlanta extends Component {
+export default class TarjetaPlantaArea extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -41,10 +41,10 @@ export default class AgregarPlanta extends Component {
     render() {
         const handleChange = (event, newValue) => {
             this.setState({ value: newValue});
-        };       
+        };  
         return (
-            <Modal tipo="agregar">
-                <EncabezadoModal>Agregar planta</EncabezadoModal>
+            <Modal tipo="tarjeta">
+                <EncabezadoModal>Opciones de planta</EncabezadoModal>
                 <CuerpoModal>
                     <form>
                         <h6 className="mb-2">Nombre</h6>
@@ -83,8 +83,8 @@ export default class AgregarPlanta extends Component {
                     </form>   
                 </CuerpoModal>
                 <PieModal>
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal"><i className="me-2 fas fa-times"></i>Cancelar</button>
-                    <button type="button" className="btn btn-success"><i className="me-2 fas fa-plus"></i>Agregar</button>
+                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal"><i className="me-2 fas fa-times"></i>Cancelar</button>
+                    <button type="button" className="btn btn-danger"><i className="me-2 fas fa-ban"></i>Remover</button>
                 </PieModal>
             </Modal>
         )

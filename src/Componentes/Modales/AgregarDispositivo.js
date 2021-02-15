@@ -22,8 +22,8 @@ export default class AgregarDispositivo extends Component {
                     </div> 
                 </CuerpoModal>
                 <PieModal>
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" className="btn btn-success">+ Agregar</button>
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal"><i className="me-2 fas fa-times"></i>Cancelar</button>
+                    <button type="button" className="btn btn-success"><i className="me-2 fas fa-plus"></i>Agregar</button>
                 </PieModal>
             </Modal>
         )

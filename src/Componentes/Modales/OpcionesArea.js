@@ -25,9 +25,9 @@ export default class OpcionesArea extends Component {
                     </form>   
                 </CuerpoModal>
                 <PieModal>
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" className="btn btn-danger">Borrar</button>
-                    <button type="button" className="btn btn-success">Guardar cambios</button>
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal"><i className="me-2 fas fa-times"></i>Cancelar</button>
+                    <button type="button" className="btn btn-danger"><i className="me-2 fas fa-trash-alt"></i>Borrar</button>
+                    <button type="button" className="btn btn-success"><i className="me-2 fas fa-save"></i>Guardar cambios</button>
                 </PieModal>
             </Modal>
         )
