@@ -68,7 +68,7 @@ export class Area extends Component {
     render() {
         return (
             <>
-                <Titulo link={"/Jardin/" + this.props.match.params.idJ } titulo={"🠔 " + this.state.titulo} desc={this.state.desc} ajustes={true}/>
+                <Titulo link={"/Jardin/" + this.props.match.params.idJ } titulo={[<i className="me-2 fas fa-chevron-left"></i> , this.state.titulo]} desc={this.state.desc} ajustes={true}/>
                 <Subtitulo subtitulo="Datos" p="1em"/>
                 <Datos alertas={this.state.alertas} temp={this.state.temp + " °C"} hum={this.state.hum + "%"} luz={convertValue(this.state.luz)}/>
                 <div className="container-fluid">

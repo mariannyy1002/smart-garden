@@ -58,7 +58,7 @@ export class Jardin extends Component {
         totalAlertas = this.state.alertas;
         return (
             <>
-                <Titulo link="/Jardines" titulo={"🠔 " + this.state.titulo} desc={this.state.desc} lugar="área" alertas={totalAlertas} ajustes={true}/>
+                <Titulo link="/Jardines" titulo={[<i className="me-2 fas fa-chevron-left"></i> , this.state.titulo]} desc={this.state.desc} lugar="área" alertas={totalAlertas} ajustes={true}/>
                 <div className="container p-4">
                     <Encabezado titulo="map-marker-alt" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.areas.map(item => (

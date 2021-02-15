@@ -3,6 +3,7 @@ import Encabezado from './Compartido/Encabezado';
 import Tarjeta, {convertValue} from './Compartido/Tarjeta';
 import Titulo from './Compartido/Titulo';
 import AgregarDispositivo from './Modales/AgregarDispositivo';
+import TarjetaDispositivo from './Modales/TarjetaDispositivo';
 
 const listaDisp = [
     { "idD": 1, "titulo": "Mi dispositivo 1", "desc": "Jardín superior", "temp": -30,"hum": 25, "luz": 1 },
@@ -25,6 +26,7 @@ export default class Dispositivos extends Component {
                     <Tarjeta titulo="Mi dispositivo 3" desc="Jardín principal" temp="-7 °C" hum="5%" luz="⚪"/>*/}
                 </div>
                 <AgregarDispositivo/>
+                <TarjetaDispositivo/>
             </>
         )
     }
