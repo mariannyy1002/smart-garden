@@ -14,7 +14,7 @@ export default class Tarjeta extends Component {
     render() {
         return (
             <div className="card text-white mb-2">
-                <div className="d-flex align-items-center px-2 py-3 btn btn-warning" data-bs-toggle="modal" data-bs-target={this.props.modal}>
+                <div className="d-flex align-items-center px-2 py-3 btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal-tarjeta">
                     <h5 className="card-text p-2 col-2 mb-0">{this.props.titulo}</h5>
                     <h6 className="card-text p-2 col-2 mb-0 font-weight-light">{this.props.desc}</h6>
                     <h5 className="card-text p-2 col-2 mb-0 ">{this.props.alertas}</h5>
