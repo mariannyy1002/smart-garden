@@ -13,10 +13,10 @@ const listaJardines = [
     { "id": 3, "titulo": "Mi jardín 3", "desc": "Jardín principal", "alertas": 3 }
 ]
 const listaAreas = [
-    { "idJ": 1, "idA": 1, "titulo": "Área 1", "desc": "Corral 1", "alertas": 1, "temp": 17, "hum": 50, "luz": 1 },
-    { "idJ": 2, "idA": 1, "titulo": "Área 1", "desc": "Corral 2", "alertas": 0, "temp": 17, "hum": 50, "luz": 2 },
-    { "idJ": 3, "idA": 1, "titulo": "Área 1", "desc": "Patio principal", "alertas": 2, "temp": -7, "hum": 5, "luz": 3 },
-    { "idJ": 3, "idA": 2, "titulo": "Área 2", "desc": "Corral 3", "alertas": 1, "temp": 17, "hum": 50, "luz": 4 }
+    { "idJ": 1, "idA": 1, "titulo": "Área 1", "desc": "Corral 1", "alertas": 1, "fechaHora": "2021-02-14 19:13:52", "temp": 17, "hum": 50, "luz": 1 },
+    { "idJ": 2, "idA": 1, "titulo": "Área 1", "desc": "Corral 2", "alertas": 0, "fechaHora": "2021-02-14 19:14:52", "temp": 17, "hum": 50, "luz": 2 },
+    { "idJ": 3, "idA": 1, "titulo": "Área 1", "desc": "Patio principal", "alertas": 2, "fechaHora": "2021-02-14 19:15:52", "temp": -7, "hum": 5, "luz": 3 },
+    { "idJ": 3, "idA": 2, "titulo": "Área 2", "desc": "Corral 3", "alertas": 1, "fechaHora": "2021-02-14 19:16:52", "temp": 17, "hum": 50, "luz": 4 }
 ]
 
 export class Jardin extends Component {
@@ -63,7 +63,7 @@ export class Jardin extends Component {
                     <Encabezado titulo="map-marker-alt" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.areas.map(item => (
                         <Link to={"/Area/" + item.idJ + "/" + item.idA} className="link">
-                            <Tarjeta titulo={item.titulo} desc={item.desc} alertas={ item.alertas} temp={item.temp + " °C"} hum={item.hum + "%"} luz={convertValue(item.luz)}/>
+                            <Tarjeta titulo={item.titulo} desc={item.desc} alertas={item.alertas} temp={item.temp + " °C"} hum={item.hum + "%"} luz={convertValue(item.luz)}/>
                         </Link>
                     ))}
                    {/*<Link to="/Area" className="link"><Tarjeta titulo="Área 1" desc="Patio principal" alertas="⚠ 2" temp="-7 °C" hum="5%" luz="⚪"/></Link> 

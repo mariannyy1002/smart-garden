@@ -9,10 +9,10 @@ import AgregarPlantaArea from './Modales/AgregarPlantaArea';
 import OpcionesArea from './Modales/OpcionesArea';
 
 const listaAreas = [
-    { "idJ": 1, "idA": 1, "titulo": "Área 1", "desc": "Corral 1", "alertas": 1, "temp": 17, "hum": 50, "luz": 1 },
-    { "idJ": 2, "idA": 1, "titulo": "Área 1", "desc": "Corral 2", "alertas": 0, "temp": 17, "hum": 50, "luz": 2 },
-    { "idJ": 3, "idA": 1, "titulo": "Área 1", "desc": "Patio principal", "alertas": 2, "temp": -7, "hum": 5, "luz": 3 },
-    { "idJ": 3, "idA": 2, "titulo": "Área 2", "desc": "Corral 3", "alertas": 1, "temp": 17, "hum": 50, "luz": 4 }
+    { "idJ": 1, "idA": 1, "titulo": "Área 1", "desc": "Corral 1", "alertas": 1, "fechaHora": "2021-02-14 19:13:52", "temp": 17, "hum": 50, "luz": 1 },
+    { "idJ": 2, "idA": 1, "titulo": "Área 1", "desc": "Corral 2", "alertas": 0, "fechaHora": "2021-02-14 19:14:52", "temp": 17, "hum": 50, "luz": 2 },
+    { "idJ": 3, "idA": 1, "titulo": "Área 1", "desc": "Patio principal", "alertas": 2, "fechaHora": "2021-02-14 19:15:52", "temp": -7, "hum": 5, "luz": 3 },
+    { "idJ": 3, "idA": 2, "titulo": "Área 2", "desc": "Corral 3", "alertas": 1, "fechaHora": "2021-02-14 19:16:52", "temp": 17, "hum": 50, "luz": 4 }
 ]
 const listaPlantas = [
     { "idJ": 1, "idA": 1, "idP": 1, "titulo": "Rosa", "desc": "Planta 1", "tempMin": -7, "tempMax": 27,"humMin": 5, "humMax": 50, "luzMin": 1, "luzMax": 2, "alertas": 0 },
@@ -35,6 +35,7 @@ export class Area extends Component {
             temp: "",
             hum: "",
             luz: "",
+            fechaHora: "",
             plantas: []
         };
     }
@@ -45,6 +46,7 @@ export class Area extends Component {
                     titulo: item.titulo,
                     desc: item.desc,
                     alertas: item.alertas,
+                    fechaHora: item.fechaHora,
                     temp: item.temp,
                     hum: item.hum,
                     luz: item.luz
@@ -68,9 +70,12 @@ export class Area extends Component {
     render() {
         return (
             <>
-                <Titulo link={"/Jardin/" + this.props.match.params.idJ } titulo={"🠔 " + this.state.titulo} desc={this.state.desc} ajustes={true}/>
-                <Subtitulo subtitulo="Datos" p="1em"/>
-                <Datos alertas={this.state.alertas} temp={this.state.temp + " °C"} hum={this.state.hum + "%"} luz={convertValue(this.state.luz)}/>
+                <Titulo link={"/Jardin/" + this.props.match.params.idJ } titulo={"🠔 " + this.state.titulo} desc={this.state.desc} alertas={this.state.alertas} ajustes={true}/>
+                <Subtitulo subtitulo="Datos" p="1.5em" link={"/Historial/"+ this.props.match.params.idJ + "/" + this.props.match.params.idA}/>
+                <div className="container p-4">
+                    <Encabezado datos={true}/>
+                    <Datos fechaHora={this.state.fechaHora} temp={this.state.temp + " °C"} hum={this.state.hum + "%"} luz={convertValue(this.state.luz)}/>
+                </div>
                 <div className="container-fluid">
                     <Subtitulo subtitulo="Plantas" lugar="planta"/>
                 </div>
@@ -79,9 +84,6 @@ export class Area extends Component {
                     {this.state.plantas.map(item => (
                         <Tarjeta titulo={item.titulo} desc={item.desc} alertas={item.alertas} temp={item.tempMin + " °C  —  " + item.tempMax + " °C"} hum={item.humMin + "%  —  " + item.humMax + "%"} luz={<>{convertValue(item.luzMin)} — {convertValue(item.luzMax)}</>}/>
                     ))}
-                   {/*<Tarjeta titulo="Rosas" desc="Rosa silvestre" temp="-7 °C  —  27 °C" hum="5%  —  25%" luz="⚪  —  ⚫"/> 
-                   <Tarjeta titulo="Rosas" desc="Rosa silvestre" temp="-7 °C  —  27 °C" hum="5%  —  25%" luz="⚪  —  ⚫"/> 
-                    <Tarjeta titulo="Rosas" desc="Rosa silvestre" temp="-7 °C  —  27 °C" hum="5%  —  25%" luz="⚪  —  ⚫"/>*/}
                 </div>
                 <Subtitulo subtitulo="Ubicación de dispositivo"/>
                 <div className="container p-4 text-center">
