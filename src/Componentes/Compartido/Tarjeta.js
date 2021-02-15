@@ -3,10 +3,10 @@ import React, { Component } from 'react'
 export function convertValue(num) {
     switch (num) {
       case 1: return <i title="Obscuro" class={'fas fa-moon fa-lg'} ></i>;
-      case 2: return <i title="Tenue" class={'fas fa-circle fa-lg'} ></i>;
-      case 3: return <i title="Normal" class={'fas fa-adjust fa-lg'} ></i>;
-      case 4: return <i title="Brillante" class={'far fa-circle fa-lg'}></i>;
-      case 5: return <i title="Muy brillante" class={'far fa-sun fa-lg'}></i>;
+      case 2: return <i title="Tenue" class={'fas fa-cloud-moon fa-lg'} ></i>;
+      case 3: return <i title="Normal" class={'fas fa-cloud fa-lg'} ></i>;
+      case 4: return <i title="Brillante" class={'fas fa-cloud-sun fa-lg'}></i>;
+      case 5: return <i title="Muy brillante" class={'fas fa-sun fa-lg'}></i>;
     }
 }
 
