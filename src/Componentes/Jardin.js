@@ -5,6 +5,7 @@ import Link from 'react-router-dom/Link';
 import { withRouter } from 'react-router-dom';
 import Encabezado from './Compartido/Encabezado';
 import AgregarArea from './Modales/AgregarArea';
+import OpcionesJardin from './Modales/OpcionesJardin';
 
 const listaJardines = [
     { "id": 1, "titulo": "Mi jardín 1", "desc": "Jardín superior", "alertas": 1 },
@@ -54,10 +55,10 @@ export class Jardin extends Component {
     }
     render() {
         var totalAlertas = "";
-        if (this.state.alertas > 0) totalAlertas = "⚠ " + this.state.alertas;
+        totalAlertas = this.state.alertas;
         return (
             <>
-                <Titulo link="/Jardines" titulo={"🠔 " + this.state.titulo} desc={this.state.desc} lugar="área" alertas={totalAlertas}/>
+                <Titulo link="/Jardines" titulo={"🠔 " + this.state.titulo} desc={this.state.desc} lugar="área" alertas={totalAlertas} ajustes={true}/>
                 <div className="container p-4">
                     <Encabezado titulo="map-marker-alt" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.areas.map(item => (
@@ -69,6 +70,7 @@ export class Jardin extends Component {
                    <Link to="/Area" className="link"><Tarjeta titulo="Área 2" desc="Corral" alertas="⚠ 1" temp="-7 °C" hum="5%" luz="⚪"/></Link>*/}
                 </div>
                 <AgregarArea/>
+                <OpcionesJardin titulo={this.state.titulo} desc={this.state.desc}/>
             </>
         )
     }

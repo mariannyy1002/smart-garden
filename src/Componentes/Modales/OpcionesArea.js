@@ -4,17 +4,17 @@ import CuerpoModal from '../Compartido/Modal/CuerpoModal'
 import EncabezadoModal from '../Compartido/Modal/EncabezadoModal'
 import PieModal from '../Compartido/Modal/PieModal'
 
-export default class AgregarArea extends Component {
+export default class OpcionesArea extends Component {
     render() {
         return (
-            <Modal tipo="agregar">
-                <EncabezadoModal>Agregar área</EncabezadoModal>
+            <Modal tipo="opciones">
+                <EncabezadoModal>Opciones de área</EncabezadoModal>
                 <CuerpoModal>
                     <form>
                         <h6 className="mb-2">Nombre</h6>
-                        <input className="form-control mb-3" type="text" name="titulo" value="" value={this.props.searchString} onchange={this.handleChange}></input>
+                        <input className="form-control mb-3" type="text" name="titulo" value="" value={this.props.titulo} onchange={this.handleChange}></input>
                         <h6 className="mb-2">Descripción</h6>
-                        <input className="form-control mb-3" type="text" name="desc" value="" value={this.props.searchString} onchange={this.handleChange}></input>
+                        <input className="form-control mb-3" type="text" name="desc" value="" value={this.props.desc} onchange={this.handleChange}></input>
                         <h6 className="mb-2">Dispositivo</h6>
                         <select className="form-select mb-3" name="dispositivo">
                             <option selected>Seleccione un dispositivo</option>
@@ -26,7 +26,8 @@ export default class AgregarArea extends Component {
                 </CuerpoModal>
                 <PieModal>
                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" className="btn btn-success">+ Agregar</button>
+                    <button type="button" className="btn btn-danger">Borrar</button>
+                    <button type="button" className="btn btn-success">Guardar cambios</button>
                 </PieModal>
             </Modal>
         )

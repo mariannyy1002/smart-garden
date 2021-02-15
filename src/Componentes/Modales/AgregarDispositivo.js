@@ -7,7 +7,7 @@ import PieModal from '../Compartido/Modal/PieModal'
 export default class AgregarDispositivo extends Component {
     render() {
         return (
-            <Modal>
+            <Modal tipo="agregar">
                 <EncabezadoModal>Agregar dispositivo</EncabezadoModal>
                 <CuerpoModal>
                     <form>

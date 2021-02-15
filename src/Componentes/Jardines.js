@@ -13,13 +13,13 @@ const listaJardines = [
 ]
 var total = 0, totalAlertas = "";
 listaJardines.map(item => total = total + item.alertas);
-if (total > 0) totalAlertas = "⚠ " + total;
+totalAlertas = total;
 
 export class Jardines extends Component {
     render() {
         return (
             <>
-                <Titulo titulo="Mis jardínes" lugar="jardín" alertas={totalAlertas} ajustes={true}/>
+                <Titulo titulo="Mis jardínes" lugar="jardín" alertas={totalAlertas}/>
                 <div className="container p-4">
                     <Encabezado titulo="tree" desc="info" alertas="exclamation-triangle"/>
                     {listaJardines.map(item => (

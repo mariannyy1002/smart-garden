@@ -6,6 +6,7 @@ import Datos from './Datos';
 import Encabezado from './Compartido/Encabezado';
 import { withRouter } from 'react-router-dom';
 import AgregarPlantaArea from './Modales/AgregarPlantaArea';
+import OpcionesArea from './Modales/OpcionesArea';
 
 const listaAreas = [
     { "idJ": 1, "idA": 1, "titulo": "Área 1", "desc": "Corral 1", "alertas": 1, "temp": 17, "hum": 50, "luz": 1 },
@@ -67,7 +68,7 @@ export class Area extends Component {
     render() {
         return (
             <>
-                <Titulo link={"/Jardin/" + this.props.match.params.idJ } titulo={"🠔 " + this.state.titulo} desc={this.state.desc}/>
+                <Titulo link={"/Jardin/" + this.props.match.params.idJ } titulo={"🠔 " + this.state.titulo} desc={this.state.desc} ajustes={true}/>
                 <Subtitulo subtitulo="Datos" p="1em"/>
                 <Datos alertas={this.state.alertas} temp={this.state.temp + " °C"} hum={this.state.hum + "%"} luz={convertValue(this.state.luz)}/>
                 <div className="container-fluid">
@@ -87,6 +88,7 @@ export class Area extends Component {
                     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3420.6064083683277!2d-110.30141720229486!3d30.98146413067978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2smx!4v1612753693349!5m2!1sen!2smx" width="1000" height="600" frameborder="0" style={{border:0}} allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                 </div>
                 <AgregarPlantaArea/>
+                <OpcionesArea titulo={this.state.titulo} desc={this.state.desc}/>
             </>
         )
     }

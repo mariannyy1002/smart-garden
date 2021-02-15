@@ -43,7 +43,7 @@ export default class AgregarPlantaArea extends Component {
             this.setState({ value: newValue});
         };  
         return (
-            <Modal>
+            <Modal tipo="agregar">
                 <EncabezadoModal>Agregar planta</EncabezadoModal>
                 <CuerpoModal>
                 <form>
