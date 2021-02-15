@@ -19,7 +19,7 @@ export class Jardines extends Component {
     render() {
         return (
             <>
-                <Titulo titulo="Mis jardínes" lugar="jardín" alertas={totalAlertas}/>
+                <Titulo titulo="Mis jardines" lugar="jardín" alertas={totalAlertas}/>
                 <div className="container p-4">
                     <Encabezado titulo="tree" desc="info" alertas="exclamation-triangle"/>
                     {listaJardines.map(item => (
