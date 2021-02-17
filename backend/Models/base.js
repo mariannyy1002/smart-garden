@@ -9,6 +9,11 @@ const objetoSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  dato3: {
+    type: String,
+    required: true,
+  },
 });
 
-module.exports = mongoose.model("Objeto", objetoSchema);
+//                               Objeto
+module.exports = mongoose.model("Base", objetoSchema);
