@@ -17,11 +17,11 @@ const marks = [
   
   function convertValue(num) {
     switch (num) {
-      case 1: return <i class={'fas fa-moon fa-lg'}></i>;
-      case 2: return <i class={'fas fa-circle fa-lg'}></i>;
-      case 3: return <i class={'fas fa-adjust fa-lg'}></i>;
-      case 4: return <i class={'far fa-circle fa-lg'}></i>;
-      case 5: return <i class={'far fa-sun fa-lg'}></i>;
+      case 1: return <i className={'fas fa-moon fa-lg'}></i>;
+      case 2: return <i className={'fas fa-cloud-moon fa-lg'}></i>;
+      case 3: return <i className={'fas fa-cloud fa-lg'}></i>;
+      case 4: return <i className={'fas fa-cloud-sun fa-lg'}></i>;
+      case 5: return <i className={'fas fa-sun fa-lg'}></i>;
     }
   }
   
@@ -73,12 +73,7 @@ export default class TarjetaPlantaArea extends Component {
                         <div className="row">
                             <div className="col text-center">
                                 <SliderLuz value={this.state.value} onChange={handleChange} aria-labelledby="range-slider" valueLabelDisplay="on" min={1} max={5} marks={marks} valueLabelFormat={(value) => <div>{convertValue(value)}</div>}/>
-                                {console.log(this.state.value)}
-                                {/*<input type="range" name="luzMin" id="luzMin" min="1" max="5" value="2" title="Tenue" className="slider slider1" required value={this.props.searchString} onchange={this.handleChange}></input>*/}
                             </div>
-                            {/*<div className="col">
-                                <input type="range" name="luzMax" id="luzMax" min="1" max="5" value="4" title="Brillante" className="slider slider2" required value={this.props.searchString} onchange={this.handleChange}></input>
-                            </div>*/}
                         </div>
                     </form>   
                 </CuerpoModal>

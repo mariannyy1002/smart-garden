@@ -12,7 +12,7 @@ const objetoSchema = new mongoose.Schema({
   ubicacion: {
     type: Array,
     required: true,
-  },
+  }
 });
 
 //                               Objeto

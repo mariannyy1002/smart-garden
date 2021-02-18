@@ -21,4 +21,24 @@ router.post("/", async (req, res) => {
   }
 });
 
+//Seleccionar todas las plantas
+router.get("/", async (req, res) => {
+  try {
+    const objetos = await Objeto.find();
+    res.json(objetos);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+//Seleccionar una planta por id
+router.get("/:id", async (req, res) => {
+  try {
+    const objetos = await Objeto.findById(req.params.id);
+    res.json(objetos);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
 module.exports = router;

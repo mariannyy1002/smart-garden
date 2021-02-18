@@ -17,4 +17,14 @@ router.post("/", async (req, res) => {
   }
 });
 
+//Seleccionar todos los dispositivos
+router.get("/", async (req, res) => {
+  try {
+    const objetos = await Objeto.find();
+    res.json(objetos);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
 module.exports = router;

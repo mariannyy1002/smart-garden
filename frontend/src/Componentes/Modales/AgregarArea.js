@@ -13,6 +13,7 @@ export default class AgregarArea extends Component {
             desc: "",
             dispositivo: "",
             idpadre: this.props.idpadre,
+            listaDisp: []
         };
     }
     actualizaTitulo = (event) => {
@@ -39,13 +40,19 @@ export default class AgregarArea extends Component {
             idpadre: this.state.idpadre,
         };
         axios
-          .post("http://localhost:5000/agregararea", { datos })
-          .then((res) => {
+            .post("http://localhost:5000/agregararea", { datos })
+            .then((res) => {
             console.log(res);
             console.log(res.data);
             window.location.replace("/Jardin/" + this.state.idpadre);
-          });
-      };
+            });
+    };
+    componentDidMount(){
+        axios.get("http://localhost:5000/dispositivos")
+        .then(res => {
+            this.setState({ listaDisp: res.data });
+        });
+    }
     render() {
         return (
             <Modal tipo="agregar">
@@ -58,10 +65,10 @@ export default class AgregarArea extends Component {
                         <input className="form-control mb-3" type="text" name="desc" value={this.state.desc} onChange={this.actualizaDesc}></input>
                         <h6 className="mb-2">Dispositivo</h6>
                         <select className="form-select mb-3" name="dispositivo" onChange={this.actualizaDispositivo}>
-                            <option selected>Seleccione un dispositivo</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option selected disabled>Seleccione un dispositivo</option>
+                            {this.state.listaDisp.map(item => (
+                                <option value={item._id}>{item.titulo}</option>
+                            ))}
                         </select>
                     </form>   
                 </CuerpoModal>

@@ -33,6 +33,9 @@ app.use("/agregarplantaarea", require("./Routes/rutasplantaareas"));
 //GENERAL
 app.use("/jardines", require("./Routes/rutasjardines"));
 app.use("/areas", require("./Routes/rutasareas"));
+app.use("/dispositivos", require("./Routes/rutasdispositivos"));
+app.use("/plantas", require("./Routes/rutasplantas"));
+app.use("/plantaareas", require("./Routes/rutasplantaareas"));
 
 //COMANDO DE EJECUCION DE SERVIDOR
 var server = app.listen(5000, function () {

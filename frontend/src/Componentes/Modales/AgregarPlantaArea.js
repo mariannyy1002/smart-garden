@@ -18,14 +18,14 @@ const marks = [
   
   function convertValue(num) {
     switch (num) {
-      case 1: return <i class={'fas fa-moon fa-lg'}></i>;
-      case 2: return <i class={'fas fa-circle fa-lg'}></i>;
-      case 3: return <i class={'fas fa-adjust fa-lg'}></i>;
-      case 4: return <i class={'far fa-circle fa-lg'}></i>;
-      case 5: return <i class={'far fa-sun fa-lg'}></i>;
+      case 1: return <i className={'fas fa-moon fa-lg'}></i>;
+      case 2: return <i className={'fas fa-cloud-moon fa-lg'}></i>;
+      case 3: return <i className={'fas fa-cloud fa-lg'}></i>;
+      case 4: return <i className={'fas fa-cloud-sun fa-lg'}></i>;
+      case 5: return <i className={'fas fa-sun fa-lg'}></i>;
     }
   }
-  
+
   const SliderLuz = withStyles({ 
       root: {color: "#24532e", width: 500, height: 3},
       valueLabel: { marginTop: "10px", '& *': { background: 'transparent', color: '#24532e'}},
@@ -46,6 +46,7 @@ export default class AgregarPlantaArea extends Component {
             idpadre: this.props.idA,
             idhijo: "",
             opcion: "n",
+            listaPlantas: []
         };
     }
     actualizaTitulo = (event) => {
@@ -128,9 +129,15 @@ export default class AgregarPlantaArea extends Component {
               });
         }
       };
+      componentDidMount(){
+        axios.get("http://localhost:5000/plantas")
+        .then(res => {
+            this.setState({ listaPlantas: res.data });
+        });
+      }
     render() {
         const handleChange = (event, newValue) => {
-            this.setState({ value: newValue});
+            this.setState({ luz: newValue});
         };  
         return (
             <Modal tipo="agregar">
@@ -139,10 +146,10 @@ export default class AgregarPlantaArea extends Component {
                 <form id="form-agregar" onSubmit={this.handleSubmit}>
                         <h6 className="mb-2">Agregar</h6>
                         <select className="form-select mb-3" name="dispositivo" onChange={this.actualizaOpcion}>
-                            <option selected value="n">Nueva planta</option>
-                            <option value="1">Rosa</option>
-                            <option value="2">Lirio</option>
-                            <option value="3">Margarita</option>
+                            <option selected disabled value="n">Nueva planta</option>
+                            {this.state.listaPlantas.map(item => (
+                                <option value={item._id}>{item.titulo}</option>
+                            ))}
                         </select>
                         <h6 className="mb-2">Nombre</h6>
                         <input className="form-control mb-3" type="text" name="titulo" value={this.state.titulo} onChange={this.actualizaTitulo}></input>

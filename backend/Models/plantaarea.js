@@ -6,7 +6,8 @@ const objetoSchema = new mongoose.Schema({
     required: true,
   },
   idhijo: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Planta',
     required: true,
   },
 });

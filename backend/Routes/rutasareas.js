@@ -18,10 +18,20 @@ router.post("/", async (req, res) => {
   }
 });
 
-//Seleccionar todas las areas
-router.get("/", async (req, res) => {
+//Seleccionar todas las áreas de un jardín
+router.get("/:idJ", async (req, res) => {
   try {
-    const objetos = await Objeto.find();
+    const objetos = await Objeto.find({'idpadre': req.params.idJ});
+    res.json(objetos);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+//Seleccionar un área por id
+router.get("/:idJ/:idA", async (req, res) => {
+  try {
+    const objetos = await Objeto.findOne({'_id':req.params.idA, 'idpadre': req.params.idJ});
     res.json(objetos);
   } catch (err) {
     res.status(400).json({ message: err.message });
