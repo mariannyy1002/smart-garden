@@ -22,13 +22,17 @@ db.once("open", () => console.log("Conectado a la Base de Datos"));
 //CONFIGURACION DE RUTAS DE SERVIDOR
 app.use(express.json());
 
+//INSERT
 //               objeto                            objetos
-app.use("/agregarplanta", require("./Routes/agregarplantas"));
-app.use("/agregardispositivo", require("./Routes/agregardispositivos"));
-app.use("/agregarjardin", require("./Routes/agregarjardines"));
-app.use("/agregararea", require("./Routes/agregarareas"));
-app.use("/agregarplantaarea", require("./Routes/agregarplantaareas"));
+app.use("/agregarplanta", require("./Routes/rutasplantas"));
+app.use("/agregardispositivo", require("./Routes/rutasdispositivos"));
+app.use("/agregarjardin", require("./Routes/rutasjardines"));
+app.use("/agregararea", require("./Routes/rutasareas"));
+app.use("/agregarplantaarea", require("./Routes/rutasplantaareas"));
 
+//GENERAL
+app.use("/jardines", require("./Routes/rutasjardines"));
+app.use("/areas", require("./Routes/rutasareas"));
 
 //COMANDO DE EJECUCION DE SERVIDOR
 var server = app.listen(5000, function () {

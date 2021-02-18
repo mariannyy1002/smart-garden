@@ -26,10 +26,13 @@ export class Jardin extends Component {
             titulo: "",
             desc: "",
             alertas: "",
+            listaJardines: [],
+            listaAreas: [],
             areas: []
         };
     }
     mostrarJardin(){
+        /**********************************************************************/
         listaJardines.forEach(item => {
             if (item.id == this.props.match.params.id){
                 this.setState({

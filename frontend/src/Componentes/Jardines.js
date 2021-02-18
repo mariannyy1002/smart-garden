@@ -5,31 +5,34 @@ import Link from 'react-router-dom/Link';
 import { withRouter } from 'react-router-dom';
 import Encabezado from './Compartido/Encabezado';
 import AgregarJardin from './Modales/AgregarJardin';
+import axios from 'axios';
 
-const listaJardines = [
-    { "id": 1, "titulo": "Mi jardín 1", "desc": "Jardín superior", "alertas": 1 },
-    { "id": 2, "titulo": "Mi jardín 2", "desc": "Jardín inferior", "alertas": 0 },
-    { "id": 3, "titulo": "Mi jardín 3", "desc": "Jardín principal", "alertas": 3 }
-]
 var total = 0, totalAlertas = "";
-listaJardines.map(item => total = total + item.alertas);
+//listaJardines.map(item => total = total + item.alertas);
 totalAlertas = total;
 
 export class Jardines extends Component {
+    constructor(props){
+        super(props);
+        this.state = { listaJardines: [] };
+    }
+    componentDidMount(){
+        axios.get("http://localhost:5000/jardines")
+        .then(res => {
+            this.setState({listaJardines: res.data});
+        });
+    }
     render() {
         return (
             <>
                 <Titulo titulo="Mis jardínes" lugar="jardín" alertas={totalAlertas}/>
                 <div className="container p-4">
                     <Encabezado titulo="tree" desc="info" alertas="exclamation-triangle"/>
-                    {listaJardines.map(item => (
-                        <Link to={"/Jardin/" + item.id} className="link">
-                            <Tarjeta titulo={item.titulo} desc={item.desc} alertas={item.alertas}/>
+                    {this.state.listaJardines.map(item => (
+                        <Link to={"/Jardin/" + item._id} className="link">
+                            <Tarjeta titulo={item.titulo} desc={item.desc} /*alertas={item.alertas}*//>
                         </Link>
                     ))}
-                    {/*<Link to="/Jardin" className="link"><Tarjeta titulo="Mi jardín 1" desc="Jardín superior" alertas="⚠ 1"/></Link>
-                    <Link to="/Jardin" className="link"><Tarjeta titulo="Mi jardín 2" desc="Jardín inferior" alertas="⚠ 0"/></Link> 
-                    <Link to="/Jardin" className="link"><Tarjeta titulo="Mi jardín 3" desc="Jardín principal" alertas="⚠ 3"/></Link>*/}
                 </div>
                 <AgregarJardin/>
             </>
