@@ -20,15 +20,15 @@ db.on("error", (error) => console.error(error));
 db.once("open", () => console.log("Conectado a la Base de Datos"));
 
 //CONFIGURACION DE RUTAS DE SERVIDOR
-
 app.use(express.json());
-//        objetos                       objetos
-//const rutabases = require("./Routes/rutabases");
-////        objeto     objetos
-//app.use("/base", rutabases);
 
-const rutaplantas = require("./Routes/rutaplantas");
-app.use("/planta", rutaplantas);
+//               objeto                            objetos
+app.use("/agregarplanta", require("./Routes/agregarplantas"));
+app.use("/agregardispositivo", require("./Routes/agregardispositivos"));
+app.use("/agregarjardin", require("./Routes/agregarjardines"));
+app.use("/agregararea", require("./Routes/agregarareas"));
+app.use("/agregarplantaarea", require("./Routes/agregarplantaareas"));
+
 
 //COMANDO DE EJECUCION DE SERVIDOR
 var server = app.listen(5000, function () {

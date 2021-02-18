@@ -45,6 +45,7 @@ export default class AgregarPlanta extends Component {
             luz: [2,4],
         };
     }
+    
     actualizaTitulo = (event) => {
         this.setState({
           titulo: event.target.value,
@@ -92,10 +93,11 @@ export default class AgregarPlanta extends Component {
             luz: this.state.luz,
         };
         axios
-          .post("http://localhost:5000/planta", { datos })
+          .post("http://localhost:5000/agregarplanta", { datos })
           .then((res) => {
             console.log(res);
             console.log(res.data);
+            window.location.replace("/Plantas");
           });
       };
 
@@ -107,7 +109,7 @@ export default class AgregarPlanta extends Component {
             <Modal tipo="agregar">
                 <EncabezadoModal>Agregar planta</EncabezadoModal>
                 <CuerpoModal>
-                    <form id="formulario" onSubmit={this.handleSubmit}>
+                    <form id="form-agregar" onSubmit={this.handleSubmit}>
                         <h6 className="mb-2">Nombre</h6>
                         <input className="form-control mb-3" type="text" name="titulo" value={this.state.titulo} onChange={this.actualizaTitulo}></input>
                         <h6 className="mb-2">Descripción</h6>
@@ -144,7 +146,7 @@ export default class AgregarPlanta extends Component {
                 </CuerpoModal>
                 <PieModal>
                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal"><i className="me-2 fas fa-times"></i>Cancelar</button>
-                    <button type="submit" form="formulario" className="btn btn-success"><i className="me-2 fas fa-plus"></i>Agregar</button>
+                    <button type="submit" form="form-agregar" className="btn btn-success"><i className="me-2 fas fa-plus"></i>Agregar</button>
                 </PieModal>
             </Modal>
         )

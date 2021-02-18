@@ -69,7 +69,7 @@ export class Jardin extends Component {
                    {/*<Link to="/Area" className="link"><Tarjeta titulo="Área 1" desc="Patio principal" alertas="⚠ 2" temp="-7 °C" hum="5%" luz="⚪"/></Link> 
                    <Link to="/Area" className="link"><Tarjeta titulo="Área 2" desc="Corral" alertas="⚠ 1" temp="-7 °C" hum="5%" luz="⚪"/></Link>*/}
                 </div>
-                <AgregarArea/>
+                <AgregarArea idpadre={this.props.match.params.id}/>
                 <OpcionesJardin titulo={this.state.titulo} desc={this.state.desc}/>
             </>
         )
