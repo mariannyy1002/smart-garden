@@ -36,3 +36,9 @@ h1 { font-size: 30px; }
   background-color: #2b6337;
   border-color: #24532e;
 }
+.dropdown-menu-center {
+  left: 50% !important;
+  right: auto !important;
+  transform: translate(-50%, 0) !important;
+  min-width: max-content;
+}

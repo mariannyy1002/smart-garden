@@ -7,6 +7,7 @@ import PieModal from '../Compartido/Modal/PieModal'
 
 import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
+import PieBotonesAgregar from '../Compartido/Modal/PieBotonesAgregar';
 
 const marks = [
   { value: 1, label: "Obscuro" },
@@ -145,8 +146,7 @@ export default class AgregarPlanta extends Component {
                     </form>   
                 </CuerpoModal>
                 <PieModal>
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal"><i className="me-2 fas fa-times"></i>Cancelar</button>
-                    <button type="submit" form="form-agregar" className="btn btn-success"><i className="me-2 fas fa-plus"></i>Agregar</button>
+                    <PieBotonesAgregar/>
                 </PieModal>
             </Modal>
         )

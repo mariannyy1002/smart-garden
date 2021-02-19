@@ -6,6 +6,7 @@ import PieModal from '../Compartido/Modal/PieModal'
 
 import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
+import PieBotonesOpciones from '../Compartido/Modal/PieBotonesOpciones'
 
 const marks = [
   { value: 1, label: "Obscuro" },
@@ -83,9 +84,7 @@ export default class TarjetaPlanta extends Component {
                     </form>   
                 </CuerpoModal>
                 <PieModal>
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal"><i className="me-2 fas fa-times"></i>Cancelar</button>
-                    <button type="button" className="btn btn-danger"><i className="me-2 fas fa-trash-alt"></i>Borrar</button>
-                    <button type="button" className="btn btn-success"><i className="me-2 fas fa-save"></i>Guardar cambios</button>
+                    <PieBotonesOpciones/>
                 </PieModal>
             </Modal>
         )

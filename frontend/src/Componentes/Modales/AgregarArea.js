@@ -4,6 +4,7 @@ import Modal from '../Compartido/Modal/Modal'
 import CuerpoModal from '../Compartido/Modal/CuerpoModal'
 import EncabezadoModal from '../Compartido/Modal/EncabezadoModal'
 import PieModal from '../Compartido/Modal/PieModal'
+import PieBotonesAgregar from '../Compartido/Modal/PieBotonesAgregar';
 
 export default class AgregarArea extends Component {
     constructor(props){
@@ -73,8 +74,7 @@ export default class AgregarArea extends Component {
                     </form>   
                 </CuerpoModal>
                 <PieModal>
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal"><i className="me-2 fas fa-times"></i>Cancelar</button>
-                    <button type="submit" form="form-agregar" className="btn btn-success"><i className="me-2 fas fa-plus"></i>Agregar</button>
+                    <PieBotonesAgregar/>
                 </PieModal>
             </Modal>
         )
