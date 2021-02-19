@@ -9,6 +9,11 @@ const objetoSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  alertas: {
+    type: Number,
+    required: true,
+    default: 0
+  }
 });
 
 //                               Objeto

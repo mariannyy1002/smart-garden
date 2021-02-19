@@ -30,4 +30,14 @@ router.get("/", async (req, res) => {
   }
 });
 
+//Seleccionar un dispositivo por id
+router.get("/:id", async (req, res) => {
+  try {
+    const objetos = await Objeto.findById(req.params.id);
+    res.json(objetos);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
 module.exports = router;

@@ -17,7 +17,6 @@ export class Area extends Component {
         this.state = {
             titulo: "",
             desc: "",
-            alertas: "",
             temp: "",
             hum: "",
             luz: "",
@@ -29,15 +28,12 @@ export class Area extends Component {
     mostrarArea(){
         axios.get("http://localhost:5000/areas/" + this.props.match.params.idJ + "/" + this.props.match.params.idA)
         .then(res => {
-            this.setState({
-                titulo: res.data.titulo,
-                desc: res.data.desc,
-                /*alertas: item.alertas,
-                fechaHora: item.fechaHora,
-                temp: item.temp,
-                hum: item.hum,
-                luz: item.luz*/
-            });
+            this.setState({ titulo: res.data.titulo, desc: res.data.desc });
+            axios.get("http://localhost:5000/dispositivos/" + res.data.dispositivo)
+            .then(res => {
+                this.setState({ temp: res.data.temp, hum: res.data.hum, luz: res.data.luz, fechaHora: res.data.fechahora });
+            });   
+            
         });
     }
     mostrarPlantas(){
@@ -45,9 +41,7 @@ export class Area extends Component {
         .then(res => {
             var array = [], i = 0;
             this.setState({ listaPlantas: res.data });
-            this.state.listaPlantas.map(item => {
-                array[i++] = item.idhijo;
-            });
+            this.state.listaPlantas.map(item => { array[i++] = item.idhijo; });
             this.setState({ plantas: array });
         });
     }
@@ -55,21 +49,32 @@ export class Area extends Component {
         this.mostrarArea();
         this.mostrarPlantas();
     }
+    alertas(item) {
+        var alertas = 0;
+        if (this.state.temp < item.tempMin || this.state.temp > item.tempMax) alertas++;
+        if (this.state.hum < item.humMin || this.state.hum > item.humMax) alertas++;
+        if (this.state.luz < item.luz[0] || this.state.luz > item.luz[1]) alertas++;
+        return alertas;
+    }
+    componentDidUpdate(){
+        var total = 0;
+        this.state.plantas.map(item => { 
+            total += this.alertas(item);
+        });
+        //axios.patch("http://localhost:5000/areas/" + this.props.match.params.idA, {datos});
+    }
     render() {
-        var contenido;
-        if (this.state.plantas.length > 0)
-        {
-            contenido = 
-                [
-                    <div className="container p-4">
+        var contenido, totalAlertas = 0;
+        if (this.state.plantas.length > 0){
+            contenido = [
+                <div className="container p-4">
                     <Encabezado titulo="seedling" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.plantas.map(item => (
-                        <Tarjeta titulo={item.titulo} desc={item.desc} alertas={item.alertas} temp={item.tempMin + " °C  —  " + item.tempMax + " °C"} hum={item.humMin + "%  —  " + item.humMax + "%"} luz={<>{convertValue(item.luz[0])} — {convertValue(item.luz[1])}</>}/>
+                        <Tarjeta titulo={item.titulo} desc={item.desc} alertas={this.alertas(item)} temp={item.tempMin + " °C  —  " + item.tempMax + " °C"} hum={item.humMin + "%  —  " + item.humMax + "%"} luz={<>{convertValue(item.luz[0])} — {convertValue(item.luz[1])}</>}/>
                     ))}
-                    </div>
-                ]
-        }
-        else{
+                </div>
+            ]
+        } else {
             contenido = [
                 <div className="container p-4">
                     <LugarVacio titulo="Área está vacía" contenido="una planta"/>
@@ -78,7 +83,7 @@ export class Area extends Component {
         }
         return (
             <>
-                <Titulo link={"/Jardin/" + this.props.match.params.idJ } titulo={[<i className="me-2 fas fa-chevron-left"></i> , this.state.titulo]} desc={this.state.desc} /*alertas={this.state.alertas}*/ ajustes={true}/>
+                <Titulo link={"/Jardin/" + this.props.match.params.idJ } titulo={[<i className="me-2 fas fa-chevron-left"></i> , this.state.titulo]} desc={this.state.desc} alertas={this.state.alertas} ajustes={true}/>
                 <Subtitulo subtitulo="Datos" p="1.5em" link={"/Historial/"+ this.props.match.params.idJ + "/" + this.props.match.params.idA}/>
                 <div className="container p-4">
                     <Encabezado datos={true}/>

@@ -10,13 +10,19 @@ const objetoSchema = new mongoose.Schema({
     required: false,
   },
   dispositivo: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Dispositivo',
     required: true,
   },
   idpadre: {
     type: String,
     required: true,
   },
+  alertas:{
+    type: Number,
+    required: true,
+    default: 0
+  }
 });
 
 //                               Objeto

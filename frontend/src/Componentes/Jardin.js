@@ -16,7 +16,8 @@ export class Jardin extends Component {
             titulo: "",
             desc: "",
             alertas: "",
-            areas: []
+            areas: [],
+            listaAreas: []
         };
     }
     mostrarJardin(){
@@ -25,15 +26,22 @@ export class Jardin extends Component {
             this.setState({
                 titulo: res.data.titulo,
                 desc: res.data.desc,
-                /*alertas: item.alertas*/
+                alertas: res.data.alertas
             });
         });
     }
     mostrarAreas(){
         axios.get("http://localhost:5000/areas/" + this.props.match.params.id)
         .then(res => {
-            this.setState({areas: res.data});
+            this.setState({areas: res.data});            
         });
+    }
+    sumarAlertas(){
+        var total = 0;
+        this.state.areas.map(item => {
+            total += item.dispositivo.alertas;
+        });
+        return total;
     }
     componentDidMount() {
         this.mostrarJardin();
@@ -41,23 +49,19 @@ export class Jardin extends Component {
     }
     render() {
         var totalAlertas = "";
-        //totalAlertas = this.state.alertas;
         var contenido;
-        if (this.state.areas.length > 0)
-        {
-            contenido = 
-                [
-                    <div className="container p-4">
-                        <Encabezado titulo="map-marker-alt" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
-                        {this.state.areas.map(item => (
-                            <Link to={"/Area/" + this.props.match.params.id + "/" + item._id} className="link">
-                                <Tarjeta titulo={item.titulo} desc={item.desc} /*alertas={item.alertas} temp={item.temp + " °C"} hum={item.hum + "%"} luz={convertValue(item.luz)}*//>
-                            </Link>
-                        ))}
-                    </div>
-                ]
-        }
-        else{
+        if (this.state.areas.length > 0){
+            contenido = [
+                <div className="container p-4">
+                    <Encabezado titulo="map-marker-alt" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
+                    {this.state.areas.map(item => (
+                        <Link to={"/Area/" + this.props.match.params.id + "/" + item._id} className="link">
+                            <Tarjeta titulo={item.titulo} desc={item.desc} alertas={item.dispositivo.alertas} temp={item.dispositivo.temp + " °C"} hum={item.dispositivo.hum + "%"} luz={convertValue(item.dispositivo.luz)}/>
+                        </Link>
+                    ))}
+                </div>
+            ]
+        } else {
             contenido = [
                 <div className="container p-4">
                     <LugarVacio titulo="Jardín está vacío" contenido="un área"/>

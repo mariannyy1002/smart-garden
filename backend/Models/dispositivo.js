@@ -13,16 +13,20 @@ const objetoSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
-  temp: {
+  fechahora: {
     type: String,
+    required: false,
+  },
+  temp: {
+    type: Number,
     required: false,
   },
   hum: {
-    type: String,
+    type: Number,
     required: false,
   },
   luz: {
-    type: String,
+    type: Number,
     required: false,
   },
 });

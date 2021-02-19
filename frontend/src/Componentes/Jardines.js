@@ -9,8 +9,6 @@ import axios from 'axios';
 import LugarVacio from './Compartido/LugarVacio';
 
 var total = 0, totalAlertas = "";
-//listaJardines.map(item => total = total + item.alertas);
-totalAlertas = total;
 
 export class Jardines extends Component {
     constructor(props){
@@ -21,25 +19,24 @@ export class Jardines extends Component {
         axios.get("http://localhost:5000/jardines")
         .then(res => {
             this.setState({listaJardines: res.data});
+            this.state.listaJardines.map(item => total = total + item.alertas);
+            totalAlertas = total;
         });
     }
     render() {
         var contenido;
-        if (this.state.listaJardines.length > 0)
-        {
-            contenido = 
-                [
-                    <div className="container p-4">
+        if (this.state.listaJardines.length > 0){
+            contenido = [
+                <div className="container p-4">
                     <Encabezado titulo="tree" desc="info" alertas="exclamation-triangle"/>
                     {this.state.listaJardines.map(item => (
                         <Link to={"/Jardin/" + item._id} className="link">
-                            <Tarjeta titulo={item.titulo} desc={item.desc} /*alertas={item.alertas}*//>
+                            <Tarjeta titulo={item.titulo} desc={item.desc} alertas={item.alertas}/>
                         </Link>
                     ))}
-                    </div>
+                </div>
                 ]
-        }
-        else{
+        } else {
             contenido = [
                 <div className="container p-4">
                     <LugarVacio titulo="Jardines está vacío" contenido="un jardín"/>
