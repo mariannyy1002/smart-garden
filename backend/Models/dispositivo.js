@@ -12,7 +12,19 @@ const objetoSchema = new mongoose.Schema({
   ubicacion: {
     type: Array,
     required: true,
-  }
+  },
+  temp: {
+    type: String,
+    required: false,
+  },
+  hum: {
+    type: String,
+    required: false,
+  },
+  luz: {
+    type: String,
+    required: false,
+  },
 });
 
 //                               Objeto

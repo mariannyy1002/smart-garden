@@ -8,6 +8,9 @@ router.post("/", async (req, res) => {
     titulo: req.body.datos.titulo,
     desc: req.body.datos.desc,
     ubicacion: req.body.datos.ubicacion,
+    temp: req.body.datos.temp,
+    hum: req.body.datos.hum,
+    luz: req.body.datos.luz,
   });
   try {
     const nuevoObjeto = await objeto.save();
