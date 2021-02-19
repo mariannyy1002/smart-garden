@@ -59,7 +59,9 @@ export class Jardin extends Component {
         }
         else{
             contenido = [
-                <LugarVacio titulo="Jardín" contenido="un área"/>
+                <div className="container p-4">
+                    <LugarVacio titulo="Jardín está vacío" contenido="un área"/>
+                </div>
             ]
         }
         return (

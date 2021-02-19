@@ -9,6 +9,7 @@ import AgregarPlantaArea from './Modales/AgregarPlantaArea';
 import OpcionesArea from './Modales/OpcionesArea';
 import TarjetaPlantaArea from './Modales/TarjetaPlantaArea';
 import axios from 'axios';
+import LugarVacio from './Compartido/LugarVacio';
 
 export class Area extends Component {
     constructor(props){
@@ -55,6 +56,26 @@ export class Area extends Component {
         this.mostrarPlantas();
     }
     render() {
+        var contenido;
+        if (this.state.plantas.length > 0)
+        {
+            contenido = 
+                [
+                    <div className="container p-4">
+                    <Encabezado titulo="seedling" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
+                    {this.state.plantas.map(item => (
+                        <Tarjeta titulo={item.titulo} desc={item.desc} alertas={item.alertas} temp={item.tempMin + " °C  —  " + item.tempMax + " °C"} hum={item.humMin + "%  —  " + item.humMax + "%"} luz={<>{convertValue(item.luz[0])} — {convertValue(item.luz[1])}</>}/>
+                    ))}
+                    </div>
+                ]
+        }
+        else{
+            contenido = [
+                <div className="container p-4">
+                    <LugarVacio titulo="Área está vacía" contenido="una planta"/>
+                </div>
+            ]
+        }
         return (
             <>
                 <Titulo link={"/Jardin/" + this.props.match.params.idJ } titulo={[<i className="me-2 fas fa-chevron-left"></i> , this.state.titulo]} desc={this.state.desc} /*alertas={this.state.alertas}*/ ajustes={true}/>
@@ -66,12 +87,7 @@ export class Area extends Component {
                 <div className="container-fluid">
                     <Subtitulo subtitulo="Plantas" lugar="planta"/>
                 </div>
-                <div className="container p-4">
-                    <Encabezado titulo="seedling" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
-                    {this.state.plantas.map(item => (
-                        <Tarjeta titulo={item.titulo} desc={item.desc} alertas={item.alertas} temp={item.tempMin + " °C  —  " + item.tempMax + " °C"} hum={item.humMin + "%  —  " + item.humMax + "%"} luz={<>{convertValue(item.luz[0])} — {convertValue(item.luz[1])}</>}/>
-                    ))}
-                </div>
+                {contenido}
                 <Subtitulo subtitulo="Ubicación de dispositivo"/>
                 <div className="container p-4 text-center">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3420.6064083683277!2d-110.30141720229486!3d30.98146413067978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2smx!4v1612753693349!5m2!1sen!2smx" width="1000" height="600" frameborder="0" style={{border:0}} allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>

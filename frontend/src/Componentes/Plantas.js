@@ -34,7 +34,9 @@ export default class Plantas extends Component {
         }
         else{
             contenido = [
-                <LugarVacio titulo="Plantas" contenido="una planta"/>
+                <div className="container p-4">
+                    <LugarVacio titulo="Plantas está vacío" contenido="una planta"/>
+                </div>
             ]
         }
         return (

@@ -34,7 +34,7 @@ export default class Dispositivos extends Component {
         }
         else{
             contenido = [
-                <LugarVacio titulo="Dispositivos" contenido="un dispositivo"/>
+                <LugarVacio titulo="Dispositivos está vacío" contenido="un dispositivo"/>
             ]
         }
         return (
