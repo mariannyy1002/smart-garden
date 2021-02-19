@@ -8,19 +8,18 @@ import AgregarJardin from './Modales/AgregarJardin';
 import axios from 'axios';
 import LugarVacio from './Compartido/LugarVacio';
 
-var total = 0, totalAlertas = "";
-
 export class Jardines extends Component {
     constructor(props){
         super(props);
-        this.state = { listaJardines: [] };
+        this.state = { listaJardines: [], alertas: "" };
     }
     componentDidMount(){
+        var total = 0;
         axios.get("http://localhost:5000/jardines")
         .then(res => {
             this.setState({listaJardines: res.data});
-            this.state.listaJardines.map(item => total = total + item.alertas);
-            totalAlertas = total;
+            this.state.listaJardines.map(item => total += item.alertas);
+            this.setState({ alertas: total });
         });
     }
     render() {
@@ -45,7 +44,7 @@ export class Jardines extends Component {
         }
         return (
             <>
-                <Titulo titulo="Mis jardínes" lugar="jardín" alertas={totalAlertas}/>
+                <Titulo titulo="Mis jardínes" lugar="jardín" alertas={this.state.alertas}/>
                 {contenido}
                 <AgregarJardin/>
             </>

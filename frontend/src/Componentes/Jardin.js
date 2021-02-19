@@ -25,23 +25,20 @@ export class Jardin extends Component {
         .then(res => {
             this.setState({
                 titulo: res.data.titulo,
-                desc: res.data.desc,
-                alertas: res.data.alertas
+                desc: res.data.desc
             });
         });
     }
     mostrarAreas(){
+        var total = 0;
         axios.get("http://localhost:5000/areas/" + this.props.match.params.id)
         .then(res => {
-            this.setState({areas: res.data});            
+            this.setState({areas: res.data});
+            this.state.areas.map(item => { total += item.alertas });
+            const datos = { alertas: total };
+            this.setState({ alertas: total });
+            axios.patch("http://localhost:5000/jardines/" + this.props.match.params.id, { datos });
         });
-    }
-    sumarAlertas(){
-        var total = 0;
-        this.state.areas.map(item => {
-            total += item.dispositivo.alertas;
-        });
-        return total;
     }
     componentDidMount() {
         this.mostrarJardin();
@@ -56,7 +53,7 @@ export class Jardin extends Component {
                     <Encabezado titulo="map-marker-alt" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.areas.map(item => (
                         <Link to={"/Area/" + this.props.match.params.id + "/" + item._id} className="link">
-                            <Tarjeta titulo={item.titulo} desc={item.desc} alertas={item.dispositivo.alertas} temp={item.dispositivo.temp + " °C"} hum={item.dispositivo.hum + "%"} luz={convertValue(item.dispositivo.luz)}/>
+                            <Tarjeta titulo={item.titulo} desc={item.desc} alertas={item.alertas} temp={item.dispositivo.temp + " °C"} hum={item.dispositivo.hum + "%"} luz={convertValue(item.dispositivo.luz)}/>
                         </Link>
                     ))}
                 </div>
@@ -70,7 +67,7 @@ export class Jardin extends Component {
         }
         return (
             <>
-                <Titulo link="/Jardines" titulo={[<i className="me-2 fas fa-chevron-left"></i> , this.state.titulo]} desc={this.state.desc} lugar="área" alertas={totalAlertas} ajustes={true}/>
+                <Titulo link="/Jardines" titulo={[<i className="me-2 fas fa-chevron-left"></i> , this.state.titulo]} desc={this.state.desc} lugar="área" alertas={this.state.alertas} ajustes={true}/>
                 {contenido}
                 <AgregarArea idpadre={this.props.match.params.id}/>
                 <OpcionesJardin titulo={this.state.titulo} desc={this.state.desc}/>

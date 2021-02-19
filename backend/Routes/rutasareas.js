@@ -39,6 +39,20 @@ router.get("/:idJ/:idA", async (req, res) => {
 });
 
 //Actualizar un área
+/*router.patch("/:id", obtener, async (req, res) => {
+  if (req.body.datos.titulo != null) res.objeto.titulo = req.body.datos.titulo;
+  if (req.body.datos.desc != null) res.objeto.desc = req.body.datos.desc;
+  if (req.body.datos.dispositivo != null) res.objeto.dispositivo = req.body.datos.dispositivo;
+  if (req.body.datos.alertas != null) res.objeto.alertas = req.body.datos.alertas;
+  try {
+    const objetoAct = await res.objeto.save();
+    res.json(objetoAct);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});*/
+
+//Actualizar un área
 router.patch("/:id", obtener, async (req, res) => {
   if (req.body.datos.titulo != null) res.objeto.titulo = req.body.datos.titulo;
   if (req.body.datos.desc != null) res.objeto.desc = req.body.datos.desc;
@@ -60,7 +74,7 @@ async function obtener(req, res, next) {
       if (objeto == null) {
         return res.status(400).json({ message: "ID no encontrado" });
       }
-      res.json(objeto);
+      //res.json(objeto);
     } catch (err) {
       res.status(400).json({ message: err.message });
     }

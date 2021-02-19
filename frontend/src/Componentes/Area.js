@@ -17,6 +17,7 @@ export class Area extends Component {
         this.state = {
             titulo: "",
             desc: "",
+            alertas: "",
             temp: "",
             hum: "",
             luz: "",
@@ -32,22 +33,28 @@ export class Area extends Component {
             axios.get("http://localhost:5000/dispositivos/" + res.data.dispositivo)
             .then(res => {
                 this.setState({ temp: res.data.temp, hum: res.data.hum, luz: res.data.luz, fechaHora: res.data.fechahora });
-            });   
-            
-        });
+                this.mostrarPlantas();
+            });
+        });    
     }
     mostrarPlantas(){
         axios.get("http://localhost:5000/plantaareas/" + this.props.match.params.idA)
         .then(res => {
-            var array = [], i = 0;
+            var array = [], i = 0, total = 0;
             this.setState({ listaPlantas: res.data });
             this.state.listaPlantas.map(item => { array[i++] = item.idhijo; });
             this.setState({ plantas: array });
+            this.state.plantas.map(item => {
+                item.alertas = this.alertas(item);
+                total += item.alertas;
+            });
+            const datos = { alertas: total };
+            this.setState({ alertas: total });
+            axios.patch("http://localhost:5000/areas/" + this.props.match.params.idA, { datos });
         });
     }
     componentDidMount() {
         this.mostrarArea();
-        this.mostrarPlantas();
     }
     alertas(item) {
         var alertas = 0;
@@ -55,13 +62,6 @@ export class Area extends Component {
         if (this.state.hum < item.humMin || this.state.hum > item.humMax) alertas++;
         if (this.state.luz < item.luz[0] || this.state.luz > item.luz[1]) alertas++;
         return alertas;
-    }
-    componentDidUpdate(){
-        var total = 0;
-        this.state.plantas.map(item => { 
-            total += this.alertas(item);
-        });
-        //axios.patch("http://localhost:5000/areas/" + this.props.match.params.idA, {datos});
     }
     render() {
         var contenido, totalAlertas = 0;
