@@ -5,6 +5,7 @@ import Titulo from './Compartido/Titulo';
 import AgregarPlanta from './Modales/AgregarPlanta';
 import TarjetaPlanta from './Modales/TarjetaPlanta';
 import axios from 'axios';
+import LugarVacio from './Compartido/LugarVacio';
 
 export default class Plantas extends Component {
     constructor(props){
@@ -18,15 +19,28 @@ export default class Plantas extends Component {
         });
     }
     render() {
-        return (
-            <>
-                <Titulo titulo="Mis plantas" lugar="planta"/>
-                <div className="container p-4">
+        var contenido;
+        if (this.state.listaPlantas.length > 0)
+        {
+            contenido = 
+                [
+                    <div className="container p-4">
                     <Encabezado titulo="seedling" desc="info" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.listaPlantas.map(item => (
                         <Tarjeta titulo={item.titulo} desc={item.desc} temp={item.tempMin + " °C  —  " + item.tempMax + " °C"} hum={item.humMin + "%  —  " + item.humMax + "%"} luz={ <>{convertValue(item.luz[0])} — {convertValue(item.luz[1])}</> }/>
                     ))}
-                </div>
+                    </div>
+                ]
+        }
+        else{
+            contenido = [
+                <LugarVacio titulo="Plantas" contenido="una planta"/>
+            ]
+        }
+        return (
+            <>
+                <Titulo titulo="Mis plantas" lugar="planta"/>
+                {contenido}
                 <AgregarPlanta/>
                 <TarjetaPlanta/>
             </>

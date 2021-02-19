@@ -5,6 +5,7 @@ import Titulo from './Compartido/Titulo';
 import AgregarDispositivo from './Modales/AgregarDispositivo';
 import TarjetaDispositivo from './Modales/TarjetaDispositivo';
 import axios from 'axios';
+import LugarVacio from './Compartido/LugarVacio';
 
 export default class Dispositivos extends Component {
     constructor(props){
@@ -18,15 +19,28 @@ export default class Dispositivos extends Component {
         });
     }
     render() {
-        return (
-            <>
-                <Titulo titulo="Mis dispositivos" lugar="dispositivo"/>
-                <div className="container p-4">
+        var contenido;
+        if (this.state.listaDisp.length > 0)
+        {
+            contenido = 
+                [
+                    <div className="container p-4">
                     <Encabezado titulo="satellite-dish" desc="info" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.listaDisp.map(item => (
                         <Tarjeta titulo={item.titulo} desc={item.desc} /*temp={item.temp + " °C"} hum={item.hum + "%"} luz={convertValue(item.luz)}*//> 
                     ))}
-                </div>
+                    </div>
+                ]
+        }
+        else{
+            contenido = [
+                <LugarVacio titulo="Dispositivos" contenido="un dispositivo"/>
+            ]
+        }
+        return (
+            <>
+                <Titulo titulo="Mis dispositivos" lugar="dispositivo"/>
+                {contenido}
                 <AgregarDispositivo/>
                 <TarjetaDispositivo/>
             </>
