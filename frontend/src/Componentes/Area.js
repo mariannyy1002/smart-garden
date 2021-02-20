@@ -45,11 +45,16 @@ export class Area extends Component {
         .then(res => {
             var total = 0;
             this.setState({ listaPlantas: res.data });
-            //No sirven las alertas de plantas. :(
-            //Las actualizaciones aún no se pueden hacer. :((
-            this.state.listaPlantas.map(item => { total += item.alertas });
+            this.state.listaPlantas.map(item => { total += this.alertas(item.idhijo) });
             this.setState({ alertas: total });
         });
+    }
+    alertas(item) {
+        var alertas = 0;
+        if (this.state.temp < item.tempMin || this.state.temp > item.tempMax) alertas++;
+        if (this.state.hum < item.humMin || this.state.hum > item.humMax) alertas++;
+        if (this.state.luz < item.luz[0] || this.state.luz > item.luz[1]) alertas++;
+        return alertas;
     }
     componentDidMount() {
         this.mostrarArea();
@@ -62,7 +67,7 @@ export class Area extends Component {
                 <div className="container p-4">
                     <Encabezado titulo="seedling" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.listaPlantas.map(item => (
-                        <Tarjeta titulo={item.idhijo.titulo} desc={item.idhijo.desc} alertas={item.alertas} temp={item.idhijo.tempMin + " °C  —  " + item.idhijo.tempMax + " °C"} hum={item.idhijo.humMin + "%  —  " + item.idhijo.humMax + "%"} luz={<>{convertValue(item.idhijo.luz[0])} — {convertValue(item.idhijo.luz[1])}</>}/>
+                        <Tarjeta titulo={item.idhijo.titulo} desc={item.idhijo.desc} alertas={this.alertas(item.idhijo)} temp={item.idhijo.tempMin + " °C  —  " + item.idhijo.tempMax + " °C"} hum={item.idhijo.humMin + "%  —  " + item.idhijo.humMax + "%"} luz={<>{convertValue(item.idhijo.luz[0])} — {convertValue(item.idhijo.luz[1])}</>}/>
                     ))}
                 </div>
             ]

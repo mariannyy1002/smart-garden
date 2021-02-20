@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
 router.get("/:idA", async (req, res) => {
   try {
     const objetos = await Objeto.find({'idpadre': req.params.idA}).populate('idhijo');
-    console.log(objetos)
+    //console.log(objetos)
     res.json(objetos);
   } catch (err) {
     res.status(400).json({ message: err.message });
