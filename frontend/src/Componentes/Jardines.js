@@ -7,6 +7,7 @@ import Encabezado from './Compartido/Encabezado';
 import AgregarJardin from './Modales/AgregarJardin';
 import axios from 'axios';
 import LugarVacio from './Compartido/LugarVacio';
+import {calcularAlertas} from '../calcularAlertas.js';
 
 export class Jardines extends Component {
     constructor(props){
@@ -14,12 +15,15 @@ export class Jardines extends Component {
         this.state = { listaJardines: [], alertas: "" };
     }
     componentDidMount(){
-        var total = 0;
+        calcularAlertas();
+        axios.get("http://localhost:5000/alertas")
+        .then(res => {
+            if (res.data.length > 0) this.setState({alertas: res.data[0].alertas});
+            else this.setState({alertas: res.data[0].alertas});
+        });
         axios.get("http://localhost:5000/jardines")
         .then(res => {
             this.setState({listaJardines: res.data});
-            this.state.listaJardines.map(item => total += item.alertas);
-            this.setState({ alertas: total });
         });
     }
     render() {

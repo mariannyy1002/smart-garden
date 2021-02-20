@@ -10,6 +10,7 @@ import OpcionesArea from './Modales/OpcionesArea';
 import TarjetaPlantaArea from './Modales/TarjetaPlantaArea';
 import axios from 'axios';
 import LugarVacio from './Compartido/LugarVacio';
+import {calcularAlertas} from '../calcularAlertas.js';
 
 export class Area extends Component {
     constructor(props){
@@ -44,17 +45,18 @@ export class Area extends Component {
             this.setState({ listaPlantas: res.data });
             this.state.listaPlantas.map(item => { array[i++] = item.idhijo; });
             this.setState({ plantas: array });
+            console.log(this.state.plantas);
             this.state.plantas.map(item => {
                 item.alertas = this.alertas(item);
                 total += item.alertas;
             });
-            const datos = { alertas: total };
             this.setState({ alertas: total });
-            axios.patch("http://localhost:5000/areas/" + this.props.match.params.idA, { datos });
         });
     }
     componentDidMount() {
+        calcularAlertas();
         this.mostrarArea();
+        //this.mostrarPlantas();
     }
     alertas(item) {
         var alertas = 0;
@@ -64,13 +66,13 @@ export class Area extends Component {
         return alertas;
     }
     render() {
-        var contenido, totalAlertas = 0;
+        var contenido;
         if (this.state.plantas.length > 0){
             contenido = [
                 <div className="container p-4">
                     <Encabezado titulo="seedling" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.plantas.map(item => (
-                        <Tarjeta titulo={item.titulo} desc={item.desc} alertas={this.alertas(item)} temp={item.tempMin + " °C  —  " + item.tempMax + " °C"} hum={item.humMin + "%  —  " + item.humMax + "%"} luz={<>{convertValue(item.luz[0])} — {convertValue(item.luz[1])}</>}/>
+                        <Tarjeta titulo={item.titulo} desc={item.desc} alertas={item.alertas} temp={item.tempMin + " °C  —  " + item.tempMax + " °C"} hum={item.humMin + "%  —  " + item.humMax + "%"} luz={<>{convertValue(item.luz[0])} — {convertValue(item.luz[1])}</>}/>
                     ))}
                 </div>
             ]

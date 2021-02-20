@@ -8,6 +8,7 @@ import AgregarArea from './Modales/AgregarArea';
 import OpcionesJardin from './Modales/OpcionesJardin';
 import axios from 'axios';
 import LugarVacio from './Compartido/LugarVacio';
+import {calcularAlertas} from '../calcularAlertas.js';
 
 export class Jardin extends Component {
     constructor(props){
@@ -35,17 +36,15 @@ export class Jardin extends Component {
         .then(res => {
             this.setState({areas: res.data});
             this.state.areas.map(item => { total += item.alertas });
-            const datos = { alertas: total };
             this.setState({ alertas: total });
-            axios.patch("http://localhost:5000/jardines/" + this.props.match.params.id, { datos });
         });
     }
     componentDidMount() {
+        calcularAlertas();
         this.mostrarJardin();
         this.mostrarAreas();
     }
     render() {
-        var totalAlertas = "";
         var contenido;
         if (this.state.areas.length > 0){
             contenido = [
