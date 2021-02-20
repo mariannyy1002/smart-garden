@@ -15,15 +15,12 @@ export class Jardines extends Component {
         this.state = { listaJardines: [], alertas: "" };
     }
     componentDidMount(){
-        calcularAlertas();
-        axios.get("http://localhost:5000/alertas")
-        .then(res => {
-            if (res.data.length > 0) this.setState({alertas: res.data[0].alertas});
-            else this.setState({alertas: res.data[0].alertas});
-        });
         axios.get("http://localhost:5000/jardines")
         .then(res => {
+            var total = 0;
             this.setState({listaJardines: res.data});
+            this.state.listaJardines.map(item => { total += item.alertas });
+            this.setState({alertas: total});
         });
     }
     render() {

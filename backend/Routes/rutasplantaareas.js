@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 //                                objeto
 const Objeto = require("../Models/plantaarea.js");
-const Planta = require("../Models/planta.js");
+require('../consultas.js');
 
 router.post("/", async (req, res) => {
   const objeto = new Objeto({
@@ -21,10 +21,13 @@ router.post("/", async (req, res) => {
 router.get("/:idA", async (req, res) => {
   try {
     const objetos = await Objeto.find({'idpadre': req.params.idA}).populate('idhijo');
+    console.log(objetos)
     res.json(objetos);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
+
+router.get("/:idA", async (req, res) => { consultas() });
 
 module.exports = router;

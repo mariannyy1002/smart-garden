@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export function calcularAlertas() {
+export async function calcularAlertas() {
     var listaJardines = [];
     return axios.get("http://localhost:5000/jardines/")
     .then(resJ => {
@@ -22,7 +22,6 @@ export function calcularAlertas() {
                             listaPlantas = resP.data;
                             listaPlantas.map(item => { array[i++] = item.idhijo; });
                             array.map(item => { item.alertas = alertas(item, temp, hum, luz); total += item.alertas; });
-                            console.log(array)
                             const datos = { alertas: total };
                             axios.patch("http://localhost:5000/areas/" + disp._id, { datos });
                         });
@@ -35,16 +34,19 @@ export function calcularAlertas() {
         });
         var total = 0;
         listaJardines.map(item => { total += item.alertas });
-        const datos = { alertas: total };
+        return total;
+        /*const datos = { alertas: total };
         axios.get("http://localhost:5000/alertas")
         .then(res => {
             if (res.data.length > 0) {
                 let id = res.data[0]._id;
                 axios.patch("http://localhost:5000/alertas/" + id, { datos });
             } else axios.post("http://localhost:5000/alertas", { datos });
-        });
+        });*/
     });
 }
+
+calcularAlertas().then(total => {console.log(total)});
 
 function alertas(item, temp, hum, luz) {
     var alertas = 0;

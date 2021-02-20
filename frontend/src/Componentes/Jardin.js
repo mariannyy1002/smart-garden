@@ -34,13 +34,13 @@ export class Jardin extends Component {
         var total = 0;
         axios.get("http://localhost:5000/areas/" + this.props.match.params.id)
         .then(res => {
+            console.log(res.data);
             this.setState({areas: res.data});
             this.state.areas.map(item => { total += item.alertas });
             this.setState({ alertas: total });
         });
     }
     componentDidMount() {
-        calcularAlertas();
         this.mostrarJardin();
         this.mostrarAreas();
     }

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 //                                objeto
 const Objeto = require("../Models/jardin.js");
+require('../consultas.js');
 
 //Agregar jardín
 router.post("/", async (req, res) => {
@@ -26,6 +27,8 @@ router.get("/", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
+//router.get("/", async (req, res) => { consultas() });
 
 //Seleccionar un jardín por id
 router.get("/:id", async (req, res) => {

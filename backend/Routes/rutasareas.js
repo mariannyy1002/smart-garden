@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 //                                objeto
 const Objeto = require("../Models/area.js");
+require('../consultas.js');
 
 router.post("/", async (req, res) => {
   const objeto = new Objeto({
@@ -31,12 +32,15 @@ router.get("/:idJ", async (req, res) => {
 //Seleccionar un área por id
 router.get("/:idJ/:idA", async (req, res) => {
   try {
-    const objetos = await Objeto.findOne({'_id':req.params.idA, 'idpadre': req.params.idJ});
+    const objetos = await Objeto.findOne({'_id':req.params.idA, 'idpadre': req.params.idJ}).populate('dispositivo');
     res.json(objetos);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
+
+router.get("/:idJ", async (req, res) => { consultas() });
+router.get("/:idJ:/idA", async (req, res) => { consultas() });
 
 //Actualizar un área
 router.patch("/:id", obtener, async (req, res) => {

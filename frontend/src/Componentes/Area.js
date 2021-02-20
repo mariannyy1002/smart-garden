@@ -10,7 +10,6 @@ import OpcionesArea from './Modales/OpcionesArea';
 import TarjetaPlantaArea from './Modales/TarjetaPlantaArea';
 import axios from 'axios';
 import LugarVacio from './Compartido/LugarVacio';
-import {calcularAlertas} from '../calcularAlertas.js';
 
 export class Area extends Component {
     constructor(props){
@@ -30,49 +29,40 @@ export class Area extends Component {
     mostrarArea(){
         axios.get("http://localhost:5000/areas/" + this.props.match.params.idJ + "/" + this.props.match.params.idA)
         .then(res => {
-            this.setState({ titulo: res.data.titulo, desc: res.data.desc });
-            axios.get("http://localhost:5000/dispositivos/" + res.data.dispositivo)
-            .then(res => {
-                this.setState({ temp: res.data.temp, hum: res.data.hum, luz: res.data.luz, fechaHora: res.data.fechahora });
-                this.mostrarPlantas();
+            this.setState({
+                titulo: res.data.titulo,
+                desc: res.data.desc,
+                temp: res.data.dispositivo.temp,
+                hum: res.data.dispositivo.hum,
+                luz: res.data.dispositivo.luz,
+                fechaHora: res.data.dispositivo.fechahora
             });
-        });    
+            //this.mostrarPlantas();
+        });
     }
     mostrarPlantas(){
         axios.get("http://localhost:5000/plantaareas/" + this.props.match.params.idA)
         .then(res => {
-            var array = [], i = 0, total = 0;
+            var total = 0;
             this.setState({ listaPlantas: res.data });
-            this.state.listaPlantas.map(item => { array[i++] = item.idhijo; });
-            this.setState({ plantas: array });
-            console.log(this.state.plantas);
-            this.state.plantas.map(item => {
-                item.alertas = this.alertas(item);
-                total += item.alertas;
-            });
+            //No sirven las alertas de plantas. :(
+            //Las actualizaciones aún no se pueden hacer. :((
+            this.state.listaPlantas.map(item => { total += item.alertas });
             this.setState({ alertas: total });
         });
     }
     componentDidMount() {
-        calcularAlertas();
         this.mostrarArea();
-        //this.mostrarPlantas();
-    }
-    alertas(item) {
-        var alertas = 0;
-        if (this.state.temp < item.tempMin || this.state.temp > item.tempMax) alertas++;
-        if (this.state.hum < item.humMin || this.state.hum > item.humMax) alertas++;
-        if (this.state.luz < item.luz[0] || this.state.luz > item.luz[1]) alertas++;
-        return alertas;
+        this.mostrarPlantas();
     }
     render() {
         var contenido;
-        if (this.state.plantas.length > 0){
+        if (this.state.listaPlantas.length > 0){
             contenido = [
                 <div className="container p-4">
                     <Encabezado titulo="seedling" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
-                    {this.state.plantas.map(item => (
-                        <Tarjeta titulo={item.titulo} desc={item.desc} alertas={item.alertas} temp={item.tempMin + " °C  —  " + item.tempMax + " °C"} hum={item.humMin + "%  —  " + item.humMax + "%"} luz={<>{convertValue(item.luz[0])} — {convertValue(item.luz[1])}</>}/>
+                    {this.state.listaPlantas.map(item => (
+                        <Tarjeta titulo={item.idhijo.titulo} desc={item.idhijo.desc} alertas={item.alertas} temp={item.idhijo.tempMin + " °C  —  " + item.idhijo.tempMax + " °C"} hum={item.idhijo.humMin + "%  —  " + item.idhijo.humMax + "%"} luz={<>{convertValue(item.idhijo.luz[0])} — {convertValue(item.idhijo.luz[1])}</>}/>
                     ))}
                 </div>
             ]

@@ -10,6 +10,11 @@ const objetoSchema = new mongoose.Schema({
     ref: 'Planta',
     required: true,
   },
+  alertas: {
+    type: Number,
+    required: true,
+    default: 0
+  }
 });
 
 //                               Objeto

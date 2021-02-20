@@ -38,6 +38,8 @@ app.use("/plantas", require("./Routes/rutasplantas"));
 app.use("/plantaareas", require("./Routes/rutasplantaareas"));
 app.use("/alertas", require("./Routes/rutasalertas"));
 
+//CONSULTAS
+
 //COMANDO DE EJECUCION DE SERVIDOR
 var server = app.listen(5000, function () {
   console.log("Servidor escuchando en el puerto 5000");
