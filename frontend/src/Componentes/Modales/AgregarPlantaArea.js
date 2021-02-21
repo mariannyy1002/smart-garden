@@ -147,7 +147,7 @@ export default class AgregarPlantaArea extends Component {
                 <form id="form-agregar" onSubmit={this.handleSubmit}>
                         <h6 className="mb-2">Agregar</h6>
                         <select className="form-select mb-3" name="dispositivo" onChange={this.actualizaOpcion}>
-                            <option selected disabled value="n">Nueva planta</option>
+                            <option selected value="n">Nueva planta</option>
                             {this.state.listaPlantas.map(item => (
                                 <option value={item._id}>{item.titulo}</option>
                             ))}

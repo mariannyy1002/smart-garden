@@ -27,7 +27,7 @@ export default class Plantas extends Component {
                     <div className="container p-4">
                     <Encabezado titulo="seedling" desc="info" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.listaPlantas.map(item => (
-                        <Tarjeta titulo={item.titulo} desc={item.desc} temp={item.tempMin + " °C  —  " + item.tempMax + " °C"} hum={item.humMin + "%  —  " + item.humMax + "%"} luz={ <>{convertValue(item.luz[0])} — {convertValue(item.luz[1])}</> }/>
+                        <Tarjeta titulo={item.titulo} desc={item.desc} temp={item.tempMin + " °C  —  " + item.tempMax + " °C"} hum={item.humMin + "%  —  " + item.humMax + "%"} luz={ <>{convertValue(item.luz[0])} — {convertValue(item.luz[1])}</> } id={item._id}/>
                     ))}
                     </div>
                 ]

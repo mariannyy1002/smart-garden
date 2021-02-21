@@ -46,11 +46,11 @@ router.get("/:id", async (req, res) => {
 router.patch("/:id", obtener, async (req, res) => {
   if (req.body.datos.titulo != null) res.objeto.titulo = req.body.datos.titulo;
   if (req.body.datos.desc != null) res.objeto.desc = req.body.datos.desc;
-  if (req.body.datos.tempMin != null) res.objeto.alertas = req.body.datos.tempMin;
-  if (req.body.datos.tempMax != null) res.objeto.alertas = req.body.datos.tempMax;
-  if (req.body.datos.humMin != null) res.objeto.alertas = req.body.datos.humMin;
-  if (req.body.datos.humMax != null) res.objeto.alertas = req.body.datos.humMax;
-  if (req.body.datos.luz != null) res.objeto.alertas = req.body.datos.luz;
+  if (req.body.datos.tempMin != null) res.objeto.tempMin = req.body.datos.tempMin;
+  if (req.body.datos.tempMax != null) res.objeto.tempMax = req.body.datos.tempMax;
+  if (req.body.datos.humMin != null) res.objeto.humMin = req.body.datos.humMin;
+  if (req.body.datos.humMax != null) res.objeto.humMax = req.body.datos.humMax;
+  if (req.body.datos.luz != null) res.objeto.luz = req.body.datos.luz;
 
   try {
     const objetoAct = await res.objeto.save();

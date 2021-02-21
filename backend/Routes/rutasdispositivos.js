@@ -44,7 +44,7 @@ router.get("/:id", async (req, res) => {
 router.patch("/:id", obtener, async (req, res) => {
   if (req.body.datos.titulo != null) res.objeto.titulo = req.body.datos.titulo;
   if (req.body.datos.desc != null) res.objeto.desc = req.body.datos.desc;
-  if (req.body.datos.ubicacion != null) res.objeto.alertas = req.body.datos.ubicacion;
+  if (req.body.datos.ubicacion != null) res.objeto.ubicacion = req.body.datos.ubicacion;
   try {
     const objetoAct = await res.objeto.save();
     res.json(objetoAct);
