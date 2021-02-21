@@ -69,7 +69,7 @@ export class Jardin extends Component {
                 <Titulo link="/Jardines" titulo={[<i className="me-2 fas fa-chevron-left"></i> , this.state.titulo]} desc={this.state.desc} lugar="área" alertas={this.state.alertas} ajustes={true}/>
                 {contenido}
                 <AgregarArea idpadre={this.props.match.params.id}/>
-                <OpcionesJardin titulo={this.state.titulo} desc={this.state.desc}/>
+                <OpcionesJardin id={this.props.match.params.id}/>
             </>
         )
     }

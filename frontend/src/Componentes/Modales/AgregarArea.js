@@ -41,7 +41,7 @@ export default class AgregarArea extends Component {
             idpadre: this.state.idpadre,
         };
         axios
-            .post("http://localhost:5000/agregararea", { datos })
+            .post("http://localhost:5000/areas", { datos })
             .then((res) => {
             console.log(res);
             console.log(res.data);

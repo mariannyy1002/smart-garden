@@ -3,6 +3,7 @@ const router = express.Router();
 //                                objeto
 const Objeto = require("../Models/planta.js");
 
+//Insertar una planta
 router.post("/", async (req, res) => {
   const objeto = new Objeto({
     titulo: req.body.datos.titulo,
@@ -41,4 +42,37 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//Actualizar una planta
+router.patch("/:id", obtener, async (req, res) => {
+  if (req.body.datos.titulo != null) res.objeto.titulo = req.body.datos.titulo;
+  if (req.body.datos.desc != null) res.objeto.desc = req.body.datos.desc;
+  if (req.body.datos.tempMin != null) res.objeto.alertas = req.body.datos.tempMin;
+  if (req.body.datos.tempMax != null) res.objeto.alertas = req.body.datos.tempMax;
+  if (req.body.datos.humMin != null) res.objeto.alertas = req.body.datos.humMin;
+  if (req.body.datos.humMax != null) res.objeto.alertas = req.body.datos.humMax;
+  if (req.body.datos.luz != null) res.objeto.alertas = req.body.datos.luz;
+
+  try {
+    const objetoAct = await res.objeto.save();
+    res.json(objetoAct);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+//Funcion para obtener una planta por id
+async function obtener(req, res, next) {
+  let objeto;
+    try {
+      objeto = await Objeto.findById(req.params.id);
+      if (objeto == null) {
+        return res.status(400).json({ message: "ID no encontrado" });
+      }
+      //res.json(objeto);
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+    res.objeto = objeto;
+    next();
+}
 module.exports = router;

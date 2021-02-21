@@ -40,4 +40,33 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//Actualizar un dispositivo
+router.patch("/:id", obtener, async (req, res) => {
+  if (req.body.datos.titulo != null) res.objeto.titulo = req.body.datos.titulo;
+  if (req.body.datos.desc != null) res.objeto.desc = req.body.datos.desc;
+  if (req.body.datos.ubicacion != null) res.objeto.alertas = req.body.datos.ubicacion;
+  try {
+    const objetoAct = await res.objeto.save();
+    res.json(objetoAct);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+//Funcion para obtener un dipositivo por id
+async function obtener(req, res, next) {
+  let objeto;
+    try {
+      objeto = await Objeto.findById(req.params.id);
+      if (objeto == null) {
+        return res.status(400).json({ message: "ID no encontrado" });
+      }
+      //res.json(objeto);
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+    res.objeto = objeto;
+    next();
+}
+
 module.exports = router;

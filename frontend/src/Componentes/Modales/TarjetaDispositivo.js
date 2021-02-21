@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from "axios";
 import Modal from '../Compartido/Modal/Modal'
 import CuerpoModal from '../Compartido/Modal/CuerpoModal'
 import EncabezadoModal from '../Compartido/Modal/EncabezadoModal'
@@ -6,6 +7,30 @@ import PieModal from '../Compartido/Modal/PieModal'
 import PieBotonesOpciones from '../Compartido/Modal/PieBotonesOpciones'
 
 export default class TarjetaDispositivo extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            titulo: "",
+            desc: "",
+        };
+    }
+    mostrarModal(){
+        var modal = document.getElementById('modal-tarjeta');
+        modal.addEventListener('shown.bs.modal', (event) =>{
+            var button = event.relatedTarget
+            var id = button.getAttribute('data-bs-id')
+            axios.get("http://localhost:5000/dispositivos/" + id)
+            .then(res => {
+                this.setState({
+                    titulo: res.data.titulo,
+                    desc: res.data.desc,
+                });
+            });
+        })
+    }
+    componentDidMount(){
+        this.mostrarModal();
+    }
     render() {
         return (
             <Modal tipo="tarjeta">
@@ -13,9 +38,9 @@ export default class TarjetaDispositivo extends Component {
                 <CuerpoModal>
                     <form>
                         <h6 className="mb-2">Nombre</h6>
-                        <input id="titulo" className="form-control mb-3" type="text" name="titulo" value="" value={this.props.searchString} onchange={this.handleChange}></input>
+                        <input id="titulo" className="form-control mb-3" type="text" name="titulo" value={this.state.titulo} onchange={this.handleChanger}></input>
                         <h6 className="mb-2">Descripción</h6>
-                        <input id="desc" className="form-control mb-3" type="text" name="desc" value="" value={this.props.searchString} onchange={this.handleChange}></input>
+                        <input id="desc" className="form-control mb-3" type="text" name="desc" value="" value={this.state.desc} onchange={this.handleChang}></input>
                     </form>
                     <h6 className="mb-2">Ubicación</h6>
                     <div className="container d-flex flex-fill p-0">

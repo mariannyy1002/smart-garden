@@ -25,7 +25,7 @@ export default class Dispositivos extends Component {
                 <div className="container p-4">
                     <Encabezado titulo="satellite-dish" desc="info" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.listaDisp.map(item => (
-                        <Tarjeta titulo={item.titulo} desc={item.desc} temp={item.temp + " °C"} hum={item.hum + "%"} luz={convertValue(item.luz)}/>
+                        <Tarjeta titulo={item.titulo} desc={item.desc} temp={item.temp + " °C"} hum={item.hum + "%"} luz={convertValue(item.luz)} id={item._id}/>
                     ))}
                 </div>
             ]

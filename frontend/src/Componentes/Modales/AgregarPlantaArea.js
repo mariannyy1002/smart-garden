@@ -104,7 +104,7 @@ export default class AgregarPlantaArea extends Component {
             };
             var opc = "n";
             axios
-              .post("http://localhost:5000/agregarplanta", { datos })
+              .post("http://localhost:5000/plantas", { datos })
               .then((res) => {
                 opc = res.data._id;
                 const datos2 = {
@@ -112,7 +112,7 @@ export default class AgregarPlantaArea extends Component {
                     idhijo: opc,
                 };
                 axios
-                  .post("http://localhost:5000/agregarplantaarea", { datos2 })
+                  .post("http://localhost:5000/plantaareas", { datos2 })
                   .then((res) => {
                     window.location.replace("/Area/" + this.props.idJ + "/" + this.props.idA);
                   });

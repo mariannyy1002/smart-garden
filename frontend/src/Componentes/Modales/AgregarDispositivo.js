@@ -38,7 +38,7 @@ export default class AgregarDispositivo extends Component {
             ubicacion: this.state.ubicacion,
         };
         axios
-          .post("http://localhost:5000/agregardispositivo", { datos })
+          .post("http://localhost:5000/dispositivos", { datos })
           .then((res) => {
             console.log(res);
             console.log(res.data);

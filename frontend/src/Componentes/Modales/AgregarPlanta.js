@@ -94,7 +94,7 @@ export default class AgregarPlanta extends Component {
             luz: this.state.luz,
         };
         axios
-          .post("http://localhost:5000/agregarplanta", { datos })
+          .post("http://localhost:5000/plantas", { datos })
           .then((res) => {
             console.log(res);
             console.log(res.data);

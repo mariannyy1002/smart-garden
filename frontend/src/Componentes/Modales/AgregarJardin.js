@@ -31,7 +31,7 @@ export default class AgregarJardin extends Component {
             desc: this.state.desc,
         };
         axios
-          .post("http://localhost:5000/agregarjardin", { datos })
+          .post("http://localhost:5000/jardines", { datos })
           .then((res) => {
             console.log(res);
             console.log(res.data);
