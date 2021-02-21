@@ -38,8 +38,8 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => { consultas() });
-router.get("/:id", async (req, res) => { consultas() });
+router.get("/", async () => { consultas() });
+router.get("/:id", async () => { consultas() });
 
 //Actualizar un jardín
 router.patch("/:id", obtener, async (req, res) => {

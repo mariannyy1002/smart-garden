@@ -2,11 +2,9 @@ const Plantas = require("./Models/plantaarea");
 const Areas = require("./Models/area");
 const Jardines = require("./Models/jardin");
 
-var temp, hum, luz;
+var total2 = 0, temp = 0, hum = 0, luz = 0;
 
 Jardines.find({}, (err, data) => {
-    var total2 = 0;
-    if (err) return console.log(err);
     data.map(jardin => {
         Areas.find({'idpadre': jardin._id}, (err, data) => {
             var total1 = 0;
@@ -17,18 +15,17 @@ Jardines.find({}, (err, data) => {
                 Plantas.find({'idpadre': area._id}, (err, data) => {
                     data.map(item => {
                         item.alertas = alertas(item.idhijo, temp, hum, luz);
-                        //Plantas.findByIdAndUpdate({'_id': item._id}, {alertas: item.alertas});
-                        //Plantas.findOne({'_id': item._id}, (err, data) => {console.log(data)})
                         total1 += item.alertas;
                     });
                 }).populate('idhijo');
+                total2 += area.alertas
             });
             Areas.findOneAndUpdate({'idpadre': jardin._id}, { alertas: total1 });
-            data.map(item => { total2 += item.alertas });
         }).populate('dispositivo');
     });
+    //No se actualizan los jardines
     Jardines.findByIdAndUpdate({ alertas: total2 });
-    //data.map(item => { totalAlertas += item.alertas });
+    //Jardines.find({}, (err, data) => {console.log(data)});
 });
 
 function alertas(item, temp, hum, luz) {

@@ -28,6 +28,28 @@ router.get("/:idA", async (req, res) => {
   }
 });
 
-router.get("/:idA", async (req, res) => { consultas() });
+router.get("/:idA", async () => { consultas() });
+
+router.patch("/:id", obtener, async (req, res) => {
+  if (req.body.datos.alertas != null) res.objeto.alertas = req.body.datos.alertas;
+  try {
+    const objetoAct = await res.objeto.save();
+    res.json(objetoAct);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+async function obtener(req, res, next) {
+  let objeto;
+    try {
+      objeto = await Objeto.findById(req.params.id);
+      if (objeto == null) return res.status(400).json({ message: "ID no encontrado" });
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+    res.objeto = objeto;
+    next();
+}
 
 module.exports = router;

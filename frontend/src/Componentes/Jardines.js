@@ -7,7 +7,6 @@ import Encabezado from './Compartido/Encabezado';
 import AgregarJardin from './Modales/AgregarJardin';
 import axios from 'axios';
 import LugarVacio from './Compartido/LugarVacio';
-import {calcularAlertas} from '../calcularAlertas.js';
 
 export class Jardines extends Component {
     constructor(props){

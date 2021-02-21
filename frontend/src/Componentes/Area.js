@@ -45,7 +45,12 @@ export class Area extends Component {
         .then(res => {
             var total = 0;
             this.setState({ listaPlantas: res.data });
-            this.state.listaPlantas.map(item => { total += this.alertas(item.idhijo) });
+            this.state.listaPlantas.map(item => {
+                item.alertas = this.alertas(item.idhijo)
+                const datos = { alertas: item.alertas };
+                axios.patch("http://localhost:5000/plantaareas/" + item._id, {datos});
+                total += item.alertas
+            });
             this.setState({ alertas: total });
         });
     }
@@ -67,7 +72,7 @@ export class Area extends Component {
                 <div className="container p-4">
                     <Encabezado titulo="seedling" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.listaPlantas.map(item => (
-                        <Tarjeta titulo={item.idhijo.titulo} desc={item.idhijo.desc} alertas={this.alertas(item.idhijo)} temp={item.idhijo.tempMin + " °C  —  " + item.idhijo.tempMax + " °C"} hum={item.idhijo.humMin + "%  —  " + item.idhijo.humMax + "%"} luz={<>{convertValue(item.idhijo.luz[0])} — {convertValue(item.idhijo.luz[1])}</>}/>
+                        <Tarjeta titulo={item.idhijo.titulo} desc={item.idhijo.desc} alertas={item.alertas} temp={item.idhijo.tempMin + " °C  —  " + item.idhijo.tempMax + " °C"} hum={item.idhijo.humMin + "%  —  " + item.idhijo.humMax + "%"} luz={<>{convertValue(item.idhijo.luz[0])} — {convertValue(item.idhijo.luz[1])}</>}/>
                     ))}
                 </div>
             ]
