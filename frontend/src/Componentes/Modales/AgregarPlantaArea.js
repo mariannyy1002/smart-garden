@@ -47,7 +47,9 @@ export default class AgregarPlantaArea extends Component {
             idpadre: this.props.idA,
             idhijo: "",
             opcion: "n",
-            listaPlantas: []
+            listaPlantas: [],
+            isDisabled: false,
+            modo: "n",
         };
     }
     actualizaTitulo = (event) => {
@@ -85,14 +87,71 @@ export default class AgregarPlantaArea extends Component {
           luz: event.target.value,
         });
     };
-    actualizaOpcion = (event) => {
+    actualizaModo = (event) => {
         this.setState({
-          opcion: event.target.value,
+          modo: event.target.value,
         });
+        if(event.target.value == "n"){
+            this.setState({
+                isDisabled: false,
+                titulo: "",
+                desc: "",
+                tempMin: "",
+                tempMax: "",
+                humMin: "",
+                humMax: "",
+                luz: [2,4],
+              });
+            document.getElementById("nombre").style.display= "block";
+            document.getElementById("selector").style.display= "none";
+        }
+        else{
+            this.setState({
+                isDisabled: true,
+              });
+            document.getElementById("nombre").style.display= "none";
+            document.getElementById("select-planta").selectedIndex = "0";
+            document.getElementById("selector").style.display= "block";
+        }
+    };
+    actualizaOpcion = (event) => {
+        var id = event.target.value;
+        this.setState({
+            opcion: id,
+        });
+        var planta;
+        if (id == "n"){
+            this.setState({
+                titulo: "",
+                desc: "",
+                tempMin: "",
+                tempMax: "",
+                humMin: "",
+                humMax: "",
+                luz: [2,4],
+            });
+        }
+        else{
+            for (var i=0 ; i < this.state.listaPlantas.length ; i++)
+            {
+                if (this.state.listaPlantas[i]["_id"] == id) {
+                planta = this.state.listaPlantas[i];
+                }
+            }
+            this.setState({
+                titulo: planta.titulo,
+                desc: planta.desc,
+                tempMin: planta.tempMin,
+                tempMax: planta.tempMax,
+                humMin: planta.humMin,
+                humMax: planta.humMax,
+                luz: planta.luz,
+            });
+        }
     };
     handleSubmit = (event) => {
         event.preventDefault();
-        if (this.state.opcion == "n"){
+        if (this.state.modo == "n"){
             const datos = {
                 titulo: this.state.titulo,
                 desc: this.state.desc,
@@ -124,7 +183,7 @@ export default class AgregarPlantaArea extends Component {
                 idhijo: this.state.opcion,
             };
             axios
-              .post("http://localhost:5000/agregarplantaarea", { datos2 })
+              .post("http://localhost:5000/plantaareas", { datos2 })
               .then((res) => {
                 window.location.replace("/Area/" + this.props.idJ + "/" + this.props.idA);
               });
@@ -146,38 +205,46 @@ export default class AgregarPlantaArea extends Component {
                 <CuerpoModal>
                 <form id="form-agregar" onSubmit={this.handleSubmit}>
                         <h6 className="mb-2">Agregar</h6>
-                        <select className="form-select mb-3" name="dispositivo" onChange={this.actualizaOpcion}>
+                        <select className="form-select mb-3" onChange={this.actualizaModo}>
                             <option selected value="n">Nueva planta</option>
-                            {this.state.listaPlantas.map(item => (
-                                <option value={item._id}>{item.titulo}</option>
-                            ))}
+                            <option value="e">Planta existente</option>
                         </select>
                         <h6 className="mb-2">Nombre</h6>
-                        <input className="form-control mb-3" type="text" name="titulo" value={this.state.titulo} onChange={this.actualizaTitulo}></input>
+                        <div id="nombre">
+                            <input className="form-control mb-3" type="text" disabled={this.state.isDisabled} value={this.state.titulo} onChange={this.actualizaTitulo}></input>
+                        </div>
+                        <div id="selector" style={{display: "none"}}>
+                            <select className="form-select mb-3" id="select-planta" onChange={this.actualizaOpcion}>
+                                <option id="opcion-default" selected value="n">Selecciona una planta</option>
+                                {this.state.listaPlantas.map(item => (
+                                    <option value={item._id}>{item.titulo}</option>
+                                ))}
+                            </select>
+                        </div>
                         <h6 className="mb-2">Descripción</h6>
-                        <input className="form-control mb-3" type="text" name="desc" value={this.state.desc} onChange={this.actualizaDesc}></input>
+                        <input className="form-control mb-3" type="text" disabled={this.state.isDisabled} value={this.state.desc} onChange={this.actualizaDesc}></input>
                         <h6 className="mb-2">Temperatura</h6>
                         <div className="row">
                             <div className="col">
-                                <input className="form-control mb-3" type="number" name="tempMin" placeholder="Mínima" value={this.state.tempMin} onChange={this.actualizaTempMin}></input>
+                                <input className="form-control mb-3" type="number" disabled={this.state.isDisabled} placeholder="Mínima" value={this.state.tempMin} onChange={this.actualizaTempMin}></input>
                             </div>
                             <div className="col">
-                                <input className="form-control mb-3" type="number" name="tempMax" placeholder="Máxima" value={this.state.tempMax} onChange={this.actualizaTempMax}></input>
+                                <input className="form-control mb-3" type="number" disabled={this.state.isDisabled} placeholder="Máxima" value={this.state.tempMax} onChange={this.actualizaTempMax}></input>
                             </div>
                         </div>
                         <h6 className="mb-2">Humedad</h6>
                         <div className="row">
                             <div className="col">
-                                <input className="form-control mb-3" type="number" name="humMin" placeholder="Mínima" value={this.state.humMin} onChange={this.actualizaHumMin}></input>
+                                <input className="form-control mb-3" type="number" disabled={this.state.isDisabled} placeholder="Mínima" value={this.state.humMin} onChange={this.actualizaHumMin}></input>
                             </div>
                             <div className="col">
-                                <input className="form-control mb-3" type="number" name="humMax" placeholder="Máxima" value={this.state.humMax} onChange={this.actualizaHumMax}></input>
+                                <input className="form-control mb-3" type="number" disabled={this.state.isDisabled} placeholder="Máxima" value={this.state.humMax} onChange={this.actualizaHumMax}></input>
                             </div>
                         </div>
                         <h6 className="mb-3">Luz</h6>
                         <div className="row">
                             <div className="col text-center">
-                            <SliderLuz value={this.state.luz} onChange={handleChange} aria-labelledby="range-slider" valueLabelDisplay="on" min={1} max={5} marks={marks} valueLabelFormat={(luz) => <div>{convertValue(luz)}</div>}/>
+                            <SliderLuz value={this.state.luz} disabled={this.state.isDisabled} onChange={handleChange} aria-labelledby="range-slider" valueLabelDisplay="on" min={1} max={5} marks={marks} valueLabelFormat={(luz) => <div>{convertValue(luz)}</div>}/>
                                 {/*<input type="range" name="luzMin" id="luzMin" min="1" max="5" value="2" title="Tenue" className="slider slider1" required value={this.props.searchString} onchange={this.handleChange}></input>*/}
                             </div>
                             {/*<div className="col">

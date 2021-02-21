@@ -72,7 +72,7 @@ export class Area extends Component {
                 <div className="container p-4">
                     <Encabezado titulo="seedling" desc="info" alertas="exclamation-triangle" temp="temperature-high" hum="tint" luz="sun"/>
                     {this.state.listaPlantas.map(item => (
-                        <Tarjeta titulo={item.idhijo.titulo} desc={item.idhijo.desc} alertas={item.alertas} temp={item.idhijo.tempMin + " °C  —  " + item.idhijo.tempMax + " °C"} hum={item.idhijo.humMin + "%  —  " + item.idhijo.humMax + "%"} luz={<>{convertValue(item.idhijo.luz[0])} — {convertValue(item.idhijo.luz[1])}</>}/>
+                        <Tarjeta titulo={item.idhijo.titulo} desc={item.idhijo.desc} alertas={item.alertas} temp={item.idhijo.tempMin + " °C  —  " + item.idhijo.tempMax + " °C"} hum={item.idhijo.humMin + "%  —  " + item.idhijo.humMax + "%"} luz={<>{convertValue(item.idhijo.luz[0])} — {convertValue(item.idhijo.luz[1])}</>} id={item._id}/>
                     ))}
                 </div>
             ]
@@ -101,7 +101,7 @@ export class Area extends Component {
                 </div>
                 <AgregarPlantaArea idJ={this.props.match.params.idJ} idA={this.props.match.params.idA}/>
                 <OpcionesArea idA={this.props.match.params.idA} idJ={this.props.match.params.idJ}/>
-                <TarjetaPlantaArea/>
+                <TarjetaPlantaArea idA={this.props.match.params.idA} idJ={this.props.match.params.idJ}/>
             </>
         )
     }

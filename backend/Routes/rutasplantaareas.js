@@ -28,6 +28,28 @@ router.get("/:idA", async (req, res) => {
   }
 });
 
+//Seleccionar un plantaarea
+router.get("/a/:id", async (req, res) => {
+  try {
+    const objetos = await Objeto.findById(req.params.id);
+    res.json(objetos);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+//Remover planta de área
+router.delete("/:id", obtener, async (req, res) => {
+  try {
+    await res.objeto.remove();
+    res.json({
+      message: "Producto Eliminado",
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 router.get("/:idA", async () => { consultas() });
 
 router.patch("/:id", obtener, async (req, res) => {
