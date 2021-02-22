@@ -50,7 +50,7 @@ router.delete("/:id", obtener, async (req, res) => {
   }
 });
 
-router.get("/:idA", async () => { consultas() });
+//router.get("/:idA", async () => { consultas() });
 
 router.patch("/:id", obtener, async (req, res) => {
   if (req.body.datos.alertas != null) res.objeto.alertas = req.body.datos.alertas;

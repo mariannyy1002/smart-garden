@@ -39,8 +39,8 @@ router.get("/:idJ/:idA", async (req, res) => {
   }
 });
 
-router.get("/:idJ", async () => { consultas() });
-router.get("/:idJ:/idA", async () => { consultas() });
+//router.get("/:idJ", async () => { consultas() });
+//router.get("/:idJ:/idA", async () => { consultas() });
 
 //Actualizar un área
 router.patch("/:id", obtener, async (req, res) => {

@@ -10,6 +10,7 @@ import OpcionesArea from './Modales/OpcionesArea';
 import TarjetaPlantaArea from './Modales/TarjetaPlantaArea';
 import axios from 'axios';
 import LugarVacio from './Compartido/LugarVacio';
+import { calcularAlertas } from '../calcularAlertas';
 
 export class Area extends Component {
     constructor(props){
@@ -37,7 +38,7 @@ export class Area extends Component {
                 luz: res.data.dispositivo.luz,
                 fechaHora: res.data.dispositivo.fechahora
             });
-            //this.mostrarPlantas();
+            this.mostrarPlantas();
         });
     }
     mostrarPlantas(){
@@ -45,25 +46,25 @@ export class Area extends Component {
         .then(res => {
             var total = 0;
             this.setState({ listaPlantas: res.data });
-            this.state.listaPlantas.map(item => {
-                item.alertas = this.alertas(item.idhijo)
-                const datos = { alertas: item.alertas };
-                axios.patch("http://localhost:5000/plantaareas/" + item._id, {datos});
-                total += item.alertas
-            });
+            this.state.listaPlantas.map(item => { total += item.alertas });
             this.setState({ alertas: total });
         });
     }
-    alertas(item) {
-        var alertas = 0;
-        if (this.state.temp < item.tempMin || this.state.temp > item.tempMax) alertas++;
-        if (this.state.hum < item.humMin || this.state.hum > item.humMax) alertas++;
-        if (this.state.luz < item.luz[0] || this.state.luz > item.luz[1]) alertas++;
-        return alertas;
-    }
     componentDidMount() {
+        setInterval(() => calcularAlertas(), 1000);
         this.mostrarArea();
-        this.mostrarPlantas();
+    }
+    componentDidUpdate(prevProps, prevState){
+        if (prevState.listaPlantas !== this.state.listaPlantas) {
+            calcularAlertas();
+            axios.get("http://localhost:5000/plantaareas/" + this.props.match.params.idA)
+            .then(res => {
+                var total = 0;
+                this.setState({ listaPlantas: res.data });
+                this.state.listaPlantas.map(item => { total += item.alertas });
+                this.setState({ alertas: total });
+            });
+        }
     }
     render() {
         var contenido;

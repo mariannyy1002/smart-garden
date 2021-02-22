@@ -8,6 +8,7 @@ import AgregarArea from './Modales/AgregarArea';
 import OpcionesJardin from './Modales/OpcionesJardin';
 import axios from 'axios';
 import LugarVacio from './Compartido/LugarVacio';
+import { calcularAlertas } from '../calcularAlertas';
 
 export class Jardin extends Component {
     constructor(props){
@@ -40,6 +41,7 @@ export class Jardin extends Component {
         });
     }
     componentDidMount() {
+        setInterval(() => calcularAlertas(), 1000);
         this.mostrarJardin();
         this.mostrarAreas();
     }
