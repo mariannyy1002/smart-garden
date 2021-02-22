@@ -53,6 +53,18 @@ router.patch("/:id", obtener, async (req, res) => {
   }
 });
 
+/*//Eliminar un dispositivo
+router.delete("/:id", obtener, async (req, res) => {
+  try {
+    await res.objeto.remove();
+    res.json({
+      message: "Producto Eliminado",
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});*/
+
 //Funcion para obtener un dipositivo por id
 async function obtener(req, res, next) {
   let objeto;

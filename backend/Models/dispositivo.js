@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Area = require("./area");
 
 const objetoSchema = new mongoose.Schema({
   titulo: {
@@ -30,6 +31,11 @@ const objetoSchema = new mongoose.Schema({
     required: false,
   },
 });
+
+/*objetoSchema.pre('remove', function(next) {
+  Area.updateMany({'dispositivo': this._id}, {$unset: {dispositivo: ""}}).exec();
+  next();
+});*/
 
 //                               Objeto
 module.exports = mongoose.model("Dispositivo", objetoSchema);

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const PlantaArea = require("./plantaarea");
 
 const objetoSchema = new mongoose.Schema({
   titulo: {
@@ -29,6 +30,11 @@ const objetoSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
+});
+
+objetoSchema.pre('remove', function(next) {
+  PlantaArea.remove({'idhijo': this._id}).exec();
+  next();
 });
 
 //                               Objeto

@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 //                                objeto
 const Objeto = require("../Models/plantaarea.js");
-require('../consultas.js');
 
 router.post("/", async (req, res) => {
   const objeto = new Objeto({
@@ -50,8 +49,7 @@ router.delete("/:id", obtener, async (req, res) => {
   }
 });
 
-//router.get("/:idA", async () => { consultas() });
-
+//Actualizar alertas de una planta
 router.patch("/:id", obtener, async (req, res) => {
   if (req.body.datos.alertas != null) res.objeto.alertas = req.body.datos.alertas;
   try {

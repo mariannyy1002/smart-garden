@@ -23,7 +23,6 @@ export class Area extends Component {
             hum: "",
             luz: "",
             fechaHora: "",
-            plantas: [],
             listaPlantas: []
         };
     }

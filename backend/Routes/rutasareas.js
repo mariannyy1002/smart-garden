@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 //                                objeto
 const Objeto = require("../Models/area.js");
-require('../consultas.js');
 
 router.post("/", async (req, res) => {
   const objeto = new Objeto({
@@ -39,9 +38,6 @@ router.get("/:idJ/:idA", async (req, res) => {
   }
 });
 
-//router.get("/:idJ", async () => { consultas() });
-//router.get("/:idJ:/idA", async () => { consultas() });
-
 //Actualizar un área
 router.patch("/:id", obtener, async (req, res) => {
   if (req.body.datos.titulo != null) res.objeto.titulo = req.body.datos.titulo;
@@ -53,6 +49,18 @@ router.patch("/:id", obtener, async (req, res) => {
     res.json(objetoAct);
   } catch (err) {
     res.status(400).json({ message: err.message });
+  }
+});
+
+//Eliminar un área
+router.delete("/:id", obtener, async (req, res) => {
+  try {
+    await res.objeto.remove();
+    res.json({
+      message: "Producto Eliminado",
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 
