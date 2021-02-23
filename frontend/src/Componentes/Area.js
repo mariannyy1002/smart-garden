@@ -11,6 +11,7 @@ import TarjetaPlantaArea from './Modales/TarjetaPlantaArea';
 import axios from 'axios';
 import LugarVacio from './Compartido/LugarVacio';
 import { calcularAlertas } from '../calcularAlertas';
+import MapaMostrar from './Compartido/MapaMostrar';
 
 export class Area extends Component {
     constructor(props){
@@ -23,7 +24,8 @@ export class Area extends Component {
             hum: "",
             luz: "",
             fechaHora: "",
-            listaPlantas: []
+            listaPlantas: [],
+            ubicacion: [],
         };
     }
     mostrarArea(){
@@ -35,7 +37,8 @@ export class Area extends Component {
                 temp: res.data.dispositivo.temp,
                 hum: res.data.dispositivo.hum,
                 luz: res.data.dispositivo.luz,
-                fechaHora: res.data.dispositivo.fechahora
+                fechaHora: res.data.dispositivo.fechahora,
+                ubicacion: res.data.dispositivo.ubicacion
             });
             this.mostrarPlantas();
         });
@@ -96,8 +99,8 @@ export class Area extends Component {
                 </div>
                 {contenido}
                 <Subtitulo subtitulo="Ubicación de dispositivo"/>
-                <div className="container p-4 text-center">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3420.6064083683277!2d-110.30141720229486!3d30.98146413067978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2smx!4v1612753693349!5m2!1sen!2smx" width="1000" height="600" frameborder="0" style={{border:0}} allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                <div className="container p-4 ">
+                    <MapaMostrar ubicacion={this.state.ubicacion}/>
                 </div>
                 <AgregarPlantaArea idJ={this.props.match.params.idJ} idA={this.props.match.params.idA}/>
                 <OpcionesArea idA={this.props.match.params.idA} idJ={this.props.match.params.idJ}/>

@@ -5,6 +5,7 @@ import CuerpoModal from '../Compartido/Modal/CuerpoModal'
 import EncabezadoModal from '../Compartido/Modal/EncabezadoModal'
 import PieModal from '../Compartido/Modal/PieModal'
 import PieBotonesOpciones from '../Compartido/Modal/PieBotonesOpciones'
+import MapaEditor from '../Compartido/MapaEditor';
 
 export default class TarjetaDispositivo extends Component {
     constructor(props){
@@ -13,6 +14,8 @@ export default class TarjetaDispositivo extends Component {
             id: "",
             titulo: "",
             desc: "",
+            ubicacion: [],
+            mapa: ""
         };
     }
     mostrarModal(){
@@ -20,13 +23,16 @@ export default class TarjetaDispositivo extends Component {
         modal.addEventListener('shown.bs.modal', (event) =>{
             var button = event.relatedTarget;
             this.setState({
-                id: button.getAttribute('data-bs-id')
+                id: button.getAttribute('data-bs-id'),
+                mapa : []
             });
             axios.get("http://localhost:5000/dispositivos/" + this.state.id)
             .then(res => {
                 this.setState({
                     titulo: res.data.titulo,
                     desc: res.data.desc,
+                    ubicacion: res.data.ubicacion,
+                    mapa : [<MapaEditor ubicacion={res.data.ubicacion} parentCallback={this.callbackFunction}/>]
                 });
             });
         })
@@ -34,6 +40,9 @@ export default class TarjetaDispositivo extends Component {
     componentDidMount(){
         this.mostrarModal();
     }
+    callbackFunction = (childData) => {
+        this.setState({ubicacion: childData})
+    };
     actualizaTitulo = (event) => {
         this.setState({
           titulo: event.target.value,
@@ -49,6 +58,7 @@ export default class TarjetaDispositivo extends Component {
         const datos = {
             titulo: this.state.titulo,
             desc: this.state.desc,
+            ubicacion: this.state.ubicacion
         };
         axios
           .patch("http://localhost:5000/dispositivos/" + this.state.id,  {datos} )
@@ -71,7 +81,7 @@ export default class TarjetaDispositivo extends Component {
                     </form>
                     <h6 className="mb-2">Ubicación</h6>
                     <div className="container d-flex flex-fill p-0">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3420.6064083683277!2d-110.30141720229486!3d30.98146413067978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2smx!4v1612753693349!5m2!1sen!2smx" className="col p-0 m-0" frameborder="0" style={{border:0}} allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                        {this.state.mapa}
                     </div> 
                 </CuerpoModal>
                 <PieModal>
