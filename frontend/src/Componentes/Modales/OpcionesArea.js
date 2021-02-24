@@ -66,6 +66,14 @@ export default class OpcionesArea extends Component {
             window.location.replace("/Area/" + res.data.idpadre + "/" + res.data._id);
           });
       };
+      handleDelete = (event) => {
+        event.preventDefault();
+        axios
+          .delete("http://localhost:5000/areas/" + this.props.idA)
+          .then((res) => {
+            window.location.replace("/Jardin/" + res.data.idpadre);
+          });
+      };
     dispSeleccionado(disp){
         if (disp == this.state.dispositivo._id){
             return true;
@@ -88,7 +96,8 @@ export default class OpcionesArea extends Component {
                                 <option selected={this.dispSeleccionado(item._id)} value={item._id}>{item.titulo}</option>
                             ))}
                         </select>
-                    </form>   
+                    </form>
+                    <form id="form-borrar" onSubmit={this.handleDelete}></form>   
                 </CuerpoModal>
                 <PieModal>
                     <PieBotonesOpciones/>

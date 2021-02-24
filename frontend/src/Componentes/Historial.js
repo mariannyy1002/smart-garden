@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import {convertValue} from './Compartido/Tarjeta';
 import Datos from './Datos';
 import Titulo from './Compartido/Titulo';
 import { withRouter } from 'react-router-dom';
 import Encabezado from './Compartido/Encabezado';
+import HistorialVacio from './Compartido/HistorialVacio';
 
 const listaAreas = [
     { "idJ": 1, "idA": 1, "titulo": "Área 1", "desc": "Corral 1", "alertas": 1, "fechaHora": "2021-02-14 19:13:52", "temp": 17, "hum": 50, "luz": 1 },
@@ -36,42 +38,48 @@ export class Historial extends Component {
         };
     }
     mostrarArea(){
-        listaAreas.forEach(item => {
-            if (item.idJ == this.props.match.params.idJ && item.idA == this.props.match.params.idA){
-                this.setState({
-                    titulo: item.titulo,
-                    desc: item.desc,
-                    alertas: item.alertas,
-                    temp: item.temp,
-                    hum: item.hum,
-                    luz: item.luz
-                });
-            }
+        axios.get("http://localhost:5000/areas/" + this.props.match.params.idJ + "/" + this.props.match.params.idA)
+        .then(res => {
+            this.setState({
+                titulo: res.data.titulo,
+                desc: res.data.desc
+            });
         });
     }
     mostrarDatos(){
-        let i = 0, array = [];
-        listaDatos.forEach(item => {
-            if (item.idJ == this.props.match.params.idJ && item.idA == this.props.match.params.idA){
-                array[i++] = item;
-            }
+        axios.get("http://localhost:5000/historial/" + this.props.match.params.idA)
+        .then(res => {
+            this.setState({
+                datos: res.data
+            });
         });
-        this.setState({datos: array})
     }
     componentDidMount() {
         this.mostrarArea();
         this.mostrarDatos();
     }
     render() {
+        var contenido;
+        if (this.state.datos.length > 0){
+            contenido = [
+                    <div className="container p-4">
+                        <Encabezado datos={true}/>
+                        {this.state.datos.map(item => (
+                            <Datos fechaHora={item.fechaHora} temp={item.temp + " °C"} hum={item.hum + "%"} luz={convertValue(item.luz)}/>
+                        ))}
+                    </div>
+                ]
+        } else {
+            contenido = [
+                <div className="container p-4">
+                    <HistorialVacio/>
+                </div>
+            ]
+        }
         return (
             <>
-                <Titulo link={"/Area/" + this.props.match.params.idJ + "/" + this.props.match.params.idA } titulo={[<i className="me-2 fas fa-chevron-left"></i> , this.state.titulo]} desc={this.state.desc}/>
-                <div className="container p-4">
-                    <Encabezado datos={true}/>
-                    {this.state.datos.map(item => (
-                        <Datos fechaHora={item.fechaHora} temp={item.temp + " °C"} hum={item.hum + "%"} luz={convertValue(item.luz)}/>
-                    ))}
-                </div>
+            <Titulo link={"/Area/" + this.props.match.params.idJ + "/" + this.props.match.params.idA } titulo={[<i className="me-2 fas fa-chevron-left"></i> , "Historial "+this.state.titulo]} desc={this.state.desc}/>
+                {contenido}
             </>
         )
     }

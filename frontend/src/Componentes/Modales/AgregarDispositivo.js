@@ -60,7 +60,7 @@ export default class AgregarDispositivo extends Component {
                         <h6 className="mb-2">Descripción</h6>
                         <input className="form-control mb-3" type="text" name="desc" value={this.state.desc} onChange={this.actualizaDesc}></input>
                     </form>
-                    <h6 className="mb-2">Ubicación</h6>
+                    <h6 id="ubicacion" className="mb-2">Ubicación</h6>
                     <div className="container d-flex flex-fill p-0">
                         <MapaSelector parentCallback={this.callbackFunction}/>
                     </div> 

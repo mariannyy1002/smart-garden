@@ -126,6 +126,14 @@ export default class TarjetaPlanta extends Component {
             window.location.replace("/Plantas");
           });
       };
+      handleDelete = (event) => {
+        event.preventDefault();
+        axios
+          .delete("http://localhost:5000/plantas/" + this.state.id)
+          .then((res) => {
+            window.location.replace("/Plantas");
+          });
+      };
     render() {
         const handleChange = (event, newValue) => {
             this.setState({ luz: newValue});
@@ -167,7 +175,8 @@ export default class TarjetaPlanta extends Component {
                                 <input type="range" name="luzMax" id="luzMax" min="1" max="5" value="4" title="Brillante" className="slider slider2" required value={this.props.searchString} onchange={this.handleChange}></input>
                             </div>*/}
                         </div>
-                    </form>   
+                    </form>
+                    <form id="form-borrar" onSubmit={this.handleDelete}></form>    
                 </CuerpoModal>
                 <PieModal>
                     <PieBotonesOpciones/>

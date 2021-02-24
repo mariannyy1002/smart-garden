@@ -68,6 +68,19 @@ export default class TarjetaDispositivo extends Component {
             window.location.replace("/Dispositivos");
           });
       };
+      handleDelete = (event) => {
+        event.preventDefault();
+        axios
+          .delete("http://localhost:5000/dispositivos/" + this.state.id)
+          .then((res) => {
+              if(res.data.message){
+                window.location.replace("/Dispositivos");
+              }
+              else{
+                  alert("¡El dispositivo está asigando a un área!\n\nReemplace el dispostivo en área o borre el área para continuar.");
+              }
+          });
+      };
     render() {
         return (
             <Modal tipo="tarjeta">
@@ -79,10 +92,11 @@ export default class TarjetaDispositivo extends Component {
                         <h6 className="mb-2">Descripción</h6>
                         <input className="form-control mb-3" type="text" name="desc" value={this.state.desc} onChange={this.actualizaDesc}></input>
                     </form>
-                    <h6 className="mb-2">Ubicación</h6>
+                    <h6 id="ubicacion" className="mb-2">Ubicación</h6>
                     <div className="container d-flex flex-fill p-0">
                         {this.state.mapa}
-                    </div> 
+                    </div>
+                    <form id="form-borrar" onSubmit={this.handleDelete}></form> 
                 </CuerpoModal>
                 <PieModal>
                     <PieBotonesOpciones/>

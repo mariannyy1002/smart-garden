@@ -50,6 +50,14 @@ export default class OpcionesJardin extends Component {
             window.location.replace("/Jardin/" + res.data._id);
           });
       };
+      handleDelete = (event) => {
+        event.preventDefault();
+        axios
+          .delete("http://localhost:5000/jardines/" + this.props.id)
+          .then((res) => {
+            window.location.replace("/Jardines");
+          });
+      };
     render() {
         return (
             <Modal tipo="opciones">
@@ -60,7 +68,8 @@ export default class OpcionesJardin extends Component {
                         <input className="form-control mb-3" type="text" name="titulo" value={this.state.titulo} onChange={this.actualizaTitulo}></input>
                         <h6 className="mb-2">Descripción</h6>
                         <input className="form-control mb-3" type="text" name="desc" value={this.state.desc} onChange={this.actualizaDesc}></input>
-                    </form>   
+                    </form>
+                    <form id="form-borrar" onSubmit={this.handleDelete}></form>    
                 </CuerpoModal>
                 <PieModal>
                     <PieBotonesOpciones/>

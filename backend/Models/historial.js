@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const objetoSchema = new mongoose.Schema({
   idarea: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
   fechahora: {
@@ -10,15 +10,15 @@ const objetoSchema = new mongoose.Schema({
     required: true
   },
   temp: {
-    type: String,
+    type: Number,
     required: true,
   },
   hum: {
-    type: String,
+    type: Number,
     required: true,
   },
   luz: {
-    type: String,
+    type: Number,
     required: true,
   }
 });

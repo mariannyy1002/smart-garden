@@ -12,8 +12,8 @@ export default class PieBotonesOpciones extends Component {
                     <ul class="dropdown-menu dropdown-menu-center border-0 shadow mb-5 p-3">
                         <li><p class="font-weight-bold text-center">¿Borrar de forma permanente?</p></li>
                         <li><hr class="dropdown-divider border-0"></hr></li>
-                        <li><a class="btn btn-outline-danger border-0 col text-left ps-3" href="#"><i className="me-2 fas fa-check"></i>Sí</a></li>
-                        <li><a class="btn btn-outline-secondary border-0 col text-left ps-3" href="#"><i className="me-2 fas fa-times"></i> No</a></li>
+                        <li><button class="btn btn-outline-danger border-0 col text-left ps-3" type="submit" form="form-borrar"><i className="me-2 fas fa-check"></i>Sí</button></li>
+                        <li><a class="btn btn-outline-secondary border-0 col text-left ps-3"><i className="me-2 fas fa-times"></i> No</a></li>
                     </ul>
                 </div>
                 <button type="submit" form="form-actualizar" className="btn btn-success"><i className="me-2 fas fa-save"></i>Guardar cambios</button>

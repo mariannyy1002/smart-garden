@@ -55,10 +55,8 @@ router.patch("/:id", obtener, async (req, res) => {
 //Eliminar un área
 router.delete("/:id", obtener, async (req, res) => {
   try {
+    res.json(res.objeto);
     await res.objeto.remove();
-    res.json({
-      message: "Producto Eliminado",
-    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
