@@ -7,23 +7,6 @@ import { withRouter } from 'react-router-dom';
 import Encabezado from './Compartido/Encabezado';
 import HistorialVacio from './Compartido/HistorialVacio';
 
-const listaAreas = [
-    { "idJ": 1, "idA": 1, "titulo": "Área 1", "desc": "Corral 1", "alertas": 1, "fechaHora": "2021-02-14 19:13:52", "temp": 17, "hum": 50, "luz": 1 },
-    { "idJ": 2, "idA": 1, "titulo": "Área 1", "desc": "Corral 2", "alertas": 0, "fechaHora": "2021-02-14 19:14:52", "temp": 17, "hum": 50, "luz": 2 },
-    { "idJ": 3, "idA": 1, "titulo": "Área 1", "desc": "Patio principal", "alertas": 2, "fechaHora": "2021-02-14 19:15:52", "temp": -7, "hum": 5, "luz": 3 },
-    { "idJ": 3, "idA": 2, "titulo": "Área 2", "desc": "Corral 3", "alertas": 1, "fechaHora": "2021-02-14 19:16:52", "temp": 17, "hum": 50, "luz": 4 }
-]
-const listaDatos = [
-    { "idJ": 1, "idA": 1, "idD": 1, "fechaHora": "2020-11-07 19:57:54", "temp": 17, "hum": 50, "luz": 1 },
-    { "idJ": 1, "idA": 1, "idD": 2, "fechaHora": "2020-11-07 19:58:54", "temp": 17, "hum": 50, "luz": 1 },
-    { "idJ": 2, "idA": 1, "idD": 1, "fechaHora": "2020-11-07 19:59:54", "temp": 17, "hum": 50, "luz": 1 },
-    { "idJ": 2, "idA": 1, "idD": 2, "fechaHora": "2020-11-07 20:00:54", "temp": 17, "hum": 50, "luz": 1 },
-    { "idJ": 3, "idA": 1, "idD": 1, "fechaHora": "2020-11-07 20:01:54", "temp": 17, "hum": 50, "luz": 1 },
-    { "idJ": 3, "idA": 1, "idD": 2, "fechaHora": "2020-11-07 20:02:54", "temp": 17, "hum": 50, "luz": 1 },
-    { "idJ": 3, "idA": 2, "idD": 1, "fechaHora": "2020-11-07 20:03:54", "temp": 17, "hum": 50, "luz": 1 },
-    { "idJ": 3, "idA": 2, "idD": 2, "fechaHora": "2020-11-07 20:04:54", "temp": 17, "hum": 50, "luz": 1 }
-]
-
 export class Historial extends Component {
     constructor(props){
         super(props);
@@ -47,11 +30,10 @@ export class Historial extends Component {
         });
     }
     mostrarDatos(){
-        axios.get("http://localhost:5000/historial/" + this.props.match.params.idA)
+        axios.get("http://localhost:5000/historiales/" + this.props.match.params.idA)
         .then(res => {
-            this.setState({
-                datos: res.data
-            });
+            console.log(res.data)
+            this.setState({datos: res.data});
         });
     }
     componentDidMount() {
@@ -65,7 +47,7 @@ export class Historial extends Component {
                     <div className="container p-4">
                         <Encabezado datos={true}/>
                         {this.state.datos.map(item => (
-                            <Datos fechaHora={item.fechaHora} temp={item.temp + " °C"} hum={item.hum + "%"} luz={convertValue(item.luz)}/>
+                            <Datos fechaHora={item.fechahora} temp={item.temp + " °C"} hum={item.hum + "%"} luz={convertValue(item.luz)}/>
                         ))}
                     </div>
                 ]

@@ -23,7 +23,7 @@ router.post("/:id", async (req, res) => {
 //Ver todo el historial de un dispositivo
 router.get("/:id", async (req, res) => {
   try {
-    const objetos = await Objeto.findById(req.params.id);
+    const objetos = await Objeto.find({ 'idarea': req.params.id });
     res.json(objetos);
   } catch (err) {
     res.status(400).json({ message: err.message });

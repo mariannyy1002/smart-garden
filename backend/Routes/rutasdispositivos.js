@@ -71,11 +71,11 @@ router.post("/actualizar/:id", obtener, async (req, res) => {
         hum: req.body.datos.hum,
         luz: req.body.datos.luz,
       });
-      console.log(areas);
+      //console.log(areas);
       objeto.save();
       res.json(objeto);
     });
-    await res.objeto.save();
+    //await res.objeto.save();
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
