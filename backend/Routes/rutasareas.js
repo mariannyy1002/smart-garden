@@ -3,6 +3,7 @@ const router = express.Router();
 //                                objeto
 const Objeto = require("../Models/area.js");
 
+//Agregar un área
 router.post("/", async (req, res) => {
   const objeto = new Objeto({
     titulo: req.body.datos.titulo,

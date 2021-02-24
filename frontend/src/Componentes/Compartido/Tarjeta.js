@@ -21,7 +21,6 @@ export default class Tarjeta extends Component {
                     <h5 className="card-text p-2 col-2 mb-0 ">{this.props.temp}</h5>
                     <h5 className="card-text p-2 col-2 mb-0 ">{this.props.hum}</h5>
                     <h5 className="card-text p-2 col-2 mb-0 ">{this.props.luz}</h5>
-                    {/*<h6 className="card-text p-2  ml-6">⚙️</h6>*/}
                 </div>
             </div>
         )

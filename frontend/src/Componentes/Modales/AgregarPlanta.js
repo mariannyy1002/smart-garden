@@ -137,11 +137,7 @@ export default class AgregarPlanta extends Component {
                         <div className="row">
                             <div className="col text-center">
                                 <SliderLuz value={this.state.luz} onChange={handleChange} aria-labelledby="range-slider" valueLabelDisplay="on" min={1} max={5} marks={marks} valueLabelFormat={(luz) => <div>{convertValue(luz)}</div>}/>
-                                {/*<input type="range" name="luzMin" id="luzMin" min="1" max="5" value="2" title="Tenue" className="slider slider1" required value={this.props.searchString} onchange={this.handleChange}></input>*/}
                             </div>
-                            {/*<div className="col">
-                                <input type="range" name="luzMax" id="luzMax" min="1" max="5" value="4" title="Brillante" className="slider slider2" required value={this.props.searchString} onchange={this.handleChange}></input>
-                            </div>*/}
                         </div>
                     </form>   
                 </CuerpoModal>
