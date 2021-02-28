@@ -12,6 +12,7 @@ import axios from 'axios';
 import LugarVacio from './Compartido/LugarVacio';
 import { calcularAlertas } from '../calcularAlertas';
 import MapaMostrar from './Compartido/MapaMostrar';
+import { rutaBase } from '../RutaDB'
 
 export class Area extends Component {
     constructor(props){
@@ -29,7 +30,7 @@ export class Area extends Component {
         };
     }
     mostrarArea(){
-        axios.get("http://localhost:5000/areas/" + this.props.match.params.idJ + "/" + this.props.match.params.idA)
+        axios.get(rutaBase() + "/areas/" + this.props.match.params.idJ + "/" + this.props.match.params.idA)
         .then(res => {
             this.setState({
                 titulo: res.data.titulo,
@@ -44,7 +45,7 @@ export class Area extends Component {
         });
     }
     mostrarPlantas(){
-        axios.get("http://localhost:5000/plantaareas/" + this.props.match.params.idA)
+        axios.get(rutaBase() + "/plantaareas/" + this.props.match.params.idA)
         .then(res => {
             var total = 0;
             this.setState({ listaPlantas: res.data });
@@ -59,7 +60,7 @@ export class Area extends Component {
     componentDidUpdate(prevProps, prevState){
         if (prevState.listaPlantas !== this.state.listaPlantas) {
             calcularAlertas();
-            axios.get("http://localhost:5000/plantaareas/" + this.props.match.params.idA)
+            axios.get(rutaBase() + "/plantaareas/" + this.props.match.params.idA)
             .then(res => {
                 var total = 0;
                 this.setState({ listaPlantas: res.data });

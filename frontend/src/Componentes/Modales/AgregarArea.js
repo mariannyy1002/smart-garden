@@ -5,6 +5,7 @@ import CuerpoModal from '../Compartido/Modal/CuerpoModal'
 import EncabezadoModal from '../Compartido/Modal/EncabezadoModal'
 import PieModal from '../Compartido/Modal/PieModal'
 import PieBotonesAgregar from '../Compartido/Modal/PieBotonesAgregar';
+import { rutaBase } from '../../RutaDB'
 
 export default class AgregarArea extends Component {
     constructor(props){
@@ -41,7 +42,7 @@ export default class AgregarArea extends Component {
             idpadre: this.state.idpadre,
         };
         axios
-            .post("http://localhost:5000/areas", { datos })
+            .post(rutaBase() + "/areas", { datos })
             .then((res) => {
             console.log(res);
             console.log(res.data);
@@ -49,7 +50,7 @@ export default class AgregarArea extends Component {
             });
     };
     componentDidMount(){
-        axios.get("http://localhost:5000/dispositivos")
+        axios.get(rutaBase() + "/dispositivos")
         .then(res => {
             this.setState({ listaDisp: res.data });
         });

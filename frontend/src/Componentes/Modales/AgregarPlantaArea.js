@@ -4,6 +4,7 @@ import Modal from '../Compartido/Modal/Modal'
 import CuerpoModal from '../Compartido/Modal/CuerpoModal'
 import EncabezadoModal from '../Compartido/Modal/EncabezadoModal'
 import PieModal from '../Compartido/Modal/PieModal'
+import { rutaBase } from '../../RutaDB'
 
 import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
@@ -163,7 +164,7 @@ export default class AgregarPlantaArea extends Component {
             };
             var opc = "n";
             axios
-              .post("http://localhost:5000/plantas", { datos })
+              .post(rutaBase() + "/plantas", { datos })
               .then((res) => {
                 opc = res.data._id;
                 const datos2 = {
@@ -171,7 +172,7 @@ export default class AgregarPlantaArea extends Component {
                     idhijo: opc,
                 };
                 axios
-                  .post("http://localhost:5000/plantaareas", { datos2 })
+                  .post(rutaBase() + "/plantaareas", { datos2 })
                   .then((res) => {
                     window.location.replace("/Area/" + this.props.idJ + "/" + this.props.idA);
                   });
@@ -183,14 +184,14 @@ export default class AgregarPlantaArea extends Component {
                 idhijo: this.state.opcion,
             };
             axios
-              .post("http://localhost:5000/plantaareas", { datos2 })
+              .post(rutaBase() + "/plantaareas", { datos2 })
               .then((res) => {
                 window.location.replace("/Area/" + this.props.idJ + "/" + this.props.idA);
               });
         }
       };
       componentDidMount(){
-        axios.get("http://localhost:5000/plantas")
+        axios.get(rutaBase() + "/plantas")
         .then(res => {
             this.setState({ listaPlantas: res.data });
         });

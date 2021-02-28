@@ -4,6 +4,7 @@ import Modal from '../Compartido/Modal/Modal'
 import CuerpoModal from '../Compartido/Modal/CuerpoModal'
 import EncabezadoModal from '../Compartido/Modal/EncabezadoModal'
 import PieModal from '../Compartido/Modal/PieModal'
+import { rutaBase } from '../../RutaDB'
 
 import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
@@ -94,7 +95,7 @@ export default class AgregarPlanta extends Component {
             luz: this.state.luz,
         };
         axios
-          .post("http://localhost:5000/plantas", { datos })
+          .post(rutaBase() + "/plantas", { datos })
           .then((res) => {
             console.log(res);
             console.log(res.data);

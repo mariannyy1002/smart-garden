@@ -6,6 +6,7 @@ import EncabezadoModal from '../Compartido/Modal/EncabezadoModal'
 import PieModal from '../Compartido/Modal/PieModal'
 import PieBotonesAgregar from '../Compartido/Modal/PieBotonesAgregar';
 import MapaSelector from '../Compartido/MapaSelector';
+import { rutaBase } from '../../RutaDB'
 
 export default class AgregarDispositivo extends Component {
     constructor(props){
@@ -42,7 +43,7 @@ export default class AgregarDispositivo extends Component {
             ubicacion: this.state.ubicacion,
         };
         axios
-          .post("http://localhost:5000/dispositivos", { datos })
+          .post(rutaBase() + "/dispositivos", { datos })
           .then((res) => {
             console.log(res);
             console.log(res.data);

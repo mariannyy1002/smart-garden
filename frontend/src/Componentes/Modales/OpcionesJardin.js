@@ -5,6 +5,7 @@ import CuerpoModal from '../Compartido/Modal/CuerpoModal'
 import EncabezadoModal from '../Compartido/Modal/EncabezadoModal'
 import PieModal from '../Compartido/Modal/PieModal'
 import PieBotonesOpciones from '../Compartido/Modal/PieBotonesOpciones'
+import { rutaBase } from '../../RutaDB'
 
 export default class OpcionesJardin extends Component {
     constructor(props){
@@ -15,7 +16,7 @@ export default class OpcionesJardin extends Component {
         };
     }
     mostrarJardin(){
-        axios.get("http://localhost:5000/jardines/" + this.props.id)
+        axios.get(rutaBase() + "/jardines/" + this.props.id)
         .then(res => {
             this.setState({
                 titulo: res.data.titulo,
@@ -43,7 +44,7 @@ export default class OpcionesJardin extends Component {
             desc: this.state.desc,
         };
         axios
-          .patch("http://localhost:5000/jardines/" + this.props.id,  {datos} )
+          .patch(rutaBase() + "/jardines/" + this.props.id,  {datos} )
           .then((res) => {
             console.log(res);
             console.log(res.data);
@@ -53,7 +54,7 @@ export default class OpcionesJardin extends Component {
       handleDelete = (event) => {
         event.preventDefault();
         axios
-          .delete("http://localhost:5000/jardines/" + this.props.id)
+          .delete(rutaBase() + "/jardines/" + this.props.id)
           .then((res) => {
             window.location.replace("/Jardines");
           });

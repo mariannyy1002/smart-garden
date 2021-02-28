@@ -6,6 +6,7 @@ import EncabezadoModal from '../Compartido/Modal/EncabezadoModal'
 import PieModal from '../Compartido/Modal/PieModal'
 import PieBotonesOpciones from '../Compartido/Modal/PieBotonesOpciones'
 import MapaEditor from '../Compartido/MapaEditor';
+import { rutaBase } from '../../RutaDB'
 
 export default class TarjetaDispositivo extends Component {
     constructor(props){
@@ -26,7 +27,7 @@ export default class TarjetaDispositivo extends Component {
                 id: button.getAttribute('data-bs-id'),
                 mapa : []
             });
-            axios.get("http://localhost:5000/dispositivos/" + this.state.id)
+            axios.get(rutaBase() + "/dispositivos/" + this.state.id)
             .then(res => {
                 this.setState({
                     titulo: res.data.titulo,
@@ -61,7 +62,7 @@ export default class TarjetaDispositivo extends Component {
             ubicacion: this.state.ubicacion
         };
         axios
-          .patch("http://localhost:5000/dispositivos/" + this.state.id,  {datos} )
+          .patch(rutaBase() + "/dispositivos/" + this.state.id,  {datos} )
           .then((res) => {
             console.log(res);
             console.log(res.data);
@@ -71,7 +72,7 @@ export default class TarjetaDispositivo extends Component {
       handleDelete = (event) => {
         event.preventDefault();
         axios
-          .delete("http://localhost:5000/dispositivos/" + this.state.id)
+          .delete(rutaBase() + "/dispositivos/" + this.state.id)
           .then((res) => {
               if(res.data.message){
                 window.location.replace("/Dispositivos");

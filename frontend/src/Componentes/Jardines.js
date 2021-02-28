@@ -8,6 +8,7 @@ import AgregarJardin from './Modales/AgregarJardin';
 import axios from 'axios';
 import LugarVacio from './Compartido/LugarVacio';
 import { calcularAlertas } from '../calcularAlertas';
+import { rutaBase } from '../RutaDB'
 
 export class Jardines extends Component {
     constructor(props){
@@ -16,7 +17,7 @@ export class Jardines extends Component {
     }
     componentDidMount(){
         setInterval(() => calcularAlertas(), 1000);
-        axios.get("http://localhost:5000/jardines")
+        axios.get(rutaBase() + "/jardines")
         .then(res => {
             var total = 0;
             this.setState({listaJardines: res.data});

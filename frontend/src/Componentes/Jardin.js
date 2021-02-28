@@ -9,6 +9,7 @@ import OpcionesJardin from './Modales/OpcionesJardin';
 import axios from 'axios';
 import LugarVacio from './Compartido/LugarVacio';
 import { calcularAlertas } from '../calcularAlertas';
+import { rutaBase } from '../RutaDB'
 
 export class Jardin extends Component {
     constructor(props){
@@ -22,7 +23,7 @@ export class Jardin extends Component {
         };
     }
     mostrarJardin(){
-        axios.get("http://localhost:5000/jardines/" + this.props.match.params.id)
+        axios.get(rutaBase() + "/jardines/" + this.props.match.params.id)
         .then(res => {
             this.setState({
                 titulo: res.data.titulo,
@@ -32,7 +33,7 @@ export class Jardin extends Component {
     }
     mostrarAreas(){
         var total = 0;
-        axios.get("http://localhost:5000/areas/" + this.props.match.params.id)
+        axios.get(rutaBase() + "/areas/" + this.props.match.params.id)
         .then(res => {
             this.setState({areas: res.data});
             this.state.areas.map(item => { total += item.alertas });

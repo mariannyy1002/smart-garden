@@ -4,6 +4,7 @@ import Modal from '../Compartido/Modal/Modal'
 import CuerpoModal from '../Compartido/Modal/CuerpoModal'
 import EncabezadoModal from '../Compartido/Modal/EncabezadoModal'
 import PieModal from '../Compartido/Modal/PieModal'
+import { rutaBase } from '../../RutaDB'
 
 import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
@@ -54,12 +55,12 @@ export default class TarjetaPlantaArea extends Component {
             this.setState({
                 id: button.getAttribute('data-bs-id')
             });
-            axios.get("http://localhost:5000/plantaareas/a/" + this.state.id)
+            axios.get(rutaBase() + "/plantaareas/a/" + this.state.id)
             .then(res => {
                 this.setState({
                     idhijo: res.data.idhijo,
                 });
-                axios.get("http://localhost:5000/plantas/" + this.state.idhijo)
+                axios.get(rutaBase() + "/plantas/" + this.state.idhijo)
                 .then(res => {
                     this.setState({
                         titulo: res.data.titulo,
@@ -80,7 +81,7 @@ export default class TarjetaPlantaArea extends Component {
     handleRemove = (event) => {
         event.preventDefault();
         axios
-          .delete("http://localhost:5000/plantaareas/" + this.state.id )
+          .delete(rutaBase() + "/plantaareas/" + this.state.id )
           .then((res) => {
             window.location.replace("/Area/" + this.props.idJ + "/" + this.props.idA);
           });

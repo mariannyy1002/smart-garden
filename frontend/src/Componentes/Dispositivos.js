@@ -6,6 +6,7 @@ import AgregarDispositivo from './Modales/AgregarDispositivo';
 import TarjetaDispositivo from './Modales/TarjetaDispositivo';
 import axios from 'axios';
 import LugarVacio from './Compartido/LugarVacio';
+import { rutaBase } from '../RutaDB'
 
 export default class Dispositivos extends Component {
     constructor(props){
@@ -13,7 +14,7 @@ export default class Dispositivos extends Component {
         this.state = { listaDisp: [] };
     }
     componentDidMount(){
-        axios.get("http://localhost:5000/dispositivos")
+        axios.get(rutaBase() + "/dispositivos")
         .then(res => {
             this.setState({ listaDisp: res.data });
         });

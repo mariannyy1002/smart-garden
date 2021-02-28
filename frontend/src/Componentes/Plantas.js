@@ -6,6 +6,7 @@ import AgregarPlanta from './Modales/AgregarPlanta';
 import TarjetaPlanta from './Modales/TarjetaPlanta';
 import axios from 'axios';
 import LugarVacio from './Compartido/LugarVacio';
+import { rutaBase } from '../RutaDB';
 
 export default class Plantas extends Component {
     constructor(props){
@@ -13,7 +14,7 @@ export default class Plantas extends Component {
         this.state = { listaPlantas: [] };
     }
     componentDidMount(){
-        axios.get("http://localhost:5000/plantas")
+        axios.get(rutaBase() + "/plantas")
         .then(res => {
             this.setState({listaPlantas: res.data});
         });

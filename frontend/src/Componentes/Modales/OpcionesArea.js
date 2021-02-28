@@ -5,6 +5,7 @@ import CuerpoModal from '../Compartido/Modal/CuerpoModal'
 import EncabezadoModal from '../Compartido/Modal/EncabezadoModal'
 import PieModal from '../Compartido/Modal/PieModal'
 import PieBotonesOpciones from '../Compartido/Modal/PieBotonesOpciones'
+import { rutaBase } from '../../RutaDB'
 
 export default class OpcionesArea extends Component {
     constructor(props){
@@ -17,7 +18,7 @@ export default class OpcionesArea extends Component {
         };
     }
     mostrarArea(){
-        axios.get("http://localhost:5000/areas/" + this.props.idJ + "/" + this.props.idA)
+        axios.get(rutaBase() + "/areas/" + this.props.idJ + "/" + this.props.idA)
         .then(res => {
             this.setState({
                 titulo: res.data.titulo,
@@ -27,7 +28,7 @@ export default class OpcionesArea extends Component {
         });
     }
     mostrarDispositivos(){
-        axios.get("http://localhost:5000/dispositivos")
+        axios.get(rutaBase() + "/dispositivos")
         .then(res => {
             this.setState({ listaDisp: res.data });
         });
@@ -59,7 +60,7 @@ export default class OpcionesArea extends Component {
             dispositivo : this.state.dispositivo
         };
         axios
-          .patch("http://localhost:5000/areas/" + this.props.idA,  {datos} )
+          .patch(rutaBase() + "/areas/" + this.props.idA,  {datos} )
           .then((res) => {
             console.log(res);
             console.log(res.data);
@@ -69,7 +70,7 @@ export default class OpcionesArea extends Component {
       handleDelete = (event) => {
         event.preventDefault();
         axios
-          .delete("http://localhost:5000/areas/" + this.props.idA)
+          .delete(rutaBase() + "/areas/" + this.props.idA)
           .then((res) => {
             window.location.replace("/Jardin/" + res.data.idpadre);
           });

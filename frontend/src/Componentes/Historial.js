@@ -6,6 +6,7 @@ import Titulo from './Compartido/Titulo';
 import { withRouter } from 'react-router-dom';
 import Encabezado from './Compartido/Encabezado';
 import HistorialVacio from './Compartido/HistorialVacio';
+import { rutaBase } from '../RutaDB'
 
 export class Historial extends Component {
     constructor(props){
@@ -21,7 +22,7 @@ export class Historial extends Component {
         };
     }
     mostrarArea(){
-        axios.get("http://localhost:5000/areas/" + this.props.match.params.idJ + "/" + this.props.match.params.idA)
+        axios.get(rutaBase() + "/areas/" + this.props.match.params.idJ + "/" + this.props.match.params.idA)
         .then(res => {
             this.setState({
                 titulo: res.data.titulo,
@@ -30,7 +31,7 @@ export class Historial extends Component {
         });
     }
     mostrarDatos(){
-        axios.get("http://localhost:5000/historiales/" + this.props.match.params.idA)
+        axios.get(rutaBase() + "/historiales/" + this.props.match.params.idA)
         .then(res => {
             console.log(res.data)
             this.setState({datos: res.data});

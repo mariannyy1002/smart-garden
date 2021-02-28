@@ -5,6 +5,7 @@ import CuerpoModal from '../Compartido/Modal/CuerpoModal'
 import EncabezadoModal from '../Compartido/Modal/EncabezadoModal'
 import PieModal from '../Compartido/Modal/PieModal'
 import PieBotonesAgregar from '../Compartido/Modal/PieBotonesAgregar';
+import { rutaBase } from '../../RutaDB'
 
 export default class AgregarJardin extends Component {
     constructor(props){
@@ -31,7 +32,7 @@ export default class AgregarJardin extends Component {
             desc: this.state.desc,
         };
         axios
-          .post("http://localhost:5000/jardines", { datos })
+          .post(rutaBase() + "/jardines", { datos })
           .then((res) => {
             console.log(res);
             console.log(res.data);
