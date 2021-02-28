@@ -17,9 +17,6 @@ export default class Clima extends Component {
             });
         });
     }
-    componentDidMount(){
-        
-    }
     render() {
         return (
             <>
