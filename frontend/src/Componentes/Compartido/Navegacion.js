@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Link from "react-router-dom/Link";
+import Clima from '../Clima';
 
 export default class Navegacion extends Component {
     render() {
@@ -20,6 +21,9 @@ export default class Navegacion extends Component {
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/Dispositivos"><i className="me-2 fas fa-satellite-dish"></i>Dispositivos</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link text-white" to="/">|<i className="mx-2 fas fa-cloud-sun"></i><Clima/></Link>
                             </li>
                         </ul>
                     </div>

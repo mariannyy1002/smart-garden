@@ -7,6 +7,7 @@ import Dispositivos from './Componentes/Dispositivos';
 import Jardin from './Componentes/Jardin';
 import Area from './Componentes/Area';
 import Historial from './Componentes/Historial';
+import Clima from './Componentes/Clima';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/Jardin/:id' children={<Jardin/>}/>
           <Route path='/Area/:idJ/:idA' children={<Area/>}/>
           <Route path='/Historial/:idJ/:idA' children={<Historial/>}/>
+          <Route path='/Clima' exact children={<Clima/>}/>
         </>
       </Switch>
     </Router>
