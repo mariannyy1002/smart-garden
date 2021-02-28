@@ -21,14 +21,17 @@ const objetoSchema = new mongoose.Schema({
   temp: {
     type: Number,
     required: false,
+    default: 0
   },
   hum: {
     type: Number,
     required: false,
+    default: 0
   },
   luz: {
     type: Number,
     required: false,
+    default: 0
   },
 });
 

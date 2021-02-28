@@ -59,7 +59,6 @@ export class Area extends Component {
     }
     componentDidUpdate(prevProps, prevState){
         if (prevState.listaPlantas !== this.state.listaPlantas) {
-            calcularAlertas();
             axios.get(rutaBase() + "/plantaareas/" + this.props.match.params.idA)
             .then(res => {
                 var total = 0;
@@ -70,7 +69,7 @@ export class Area extends Component {
         }
     }
     render() {
-        var contenido;
+        var contenido, mapa;
         if (this.state.listaPlantas.length > 0){
             contenido = [
                 <div className="container p-4">
@@ -87,6 +86,7 @@ export class Area extends Component {
                 </div>
             ]
         }
+        if (this.state.ubicacion.length > 0) mapa = <MapaMostrar ubicacion={this.state.ubicacion}/>
         return (
             <>
                 <Titulo link={"/Jardin/" + this.props.match.params.idJ } titulo={[<i className="me-2 fas fa-chevron-left"></i> , this.state.titulo]} desc={this.state.desc} alertas={this.state.alertas} ajustes={true}/>
@@ -101,8 +101,8 @@ export class Area extends Component {
                 {contenido}
                 <Subtitulo subtitulo="Ubicación de dispositivo"/>
                 <div className="container p-4 ">
-                    <MapaMostrar ubicacion={this.state.ubicacion}/>
-                </div>
+                    {mapa}
+                </div>                
                 <AgregarPlantaArea idJ={this.props.match.params.idJ} idA={this.props.match.params.idA}/>
                 <OpcionesArea idA={this.props.match.params.idA} idJ={this.props.match.params.idJ}/>
                 <TarjetaPlantaArea idA={this.props.match.params.idA} idJ={this.props.match.params.idJ}/>

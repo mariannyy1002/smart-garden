@@ -1,5 +1,5 @@
-
-var direccion = '192.168.1.70';
+var direccion = '192.168.1.69';
+//var direccion = '192.168.1.70';
 var puerto = '5000';
 
 export function rutaBase() {
