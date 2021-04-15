@@ -6,5 +6,5 @@ var puerto = '5000';
 
 export function rutaBase() {
     //return "http://" + direccion + ":" + puerto;
-    return "http://" + direccion;
+    return "https://" + direccion;
 }
