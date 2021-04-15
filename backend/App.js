@@ -25,9 +25,8 @@ app.use("/plantas", require("./Routes/rutasplantas"));
 app.use("/plantaareas", require("./Routes/rutasplantaareas"));
 app.use("/historiales", require("./Routes/rutashistoriales"));
 
-var PORT = process.env.PORT
-
 //COMANDO DE EJECUCION DE SERVIDOR
+var PORT = process.env.PORT
 var server = app.listen(PORT, function () {
   console.log("Servidor escuchando en el puerto" + PORT);
 });
