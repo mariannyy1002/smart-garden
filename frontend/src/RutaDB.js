@@ -2,8 +2,9 @@
 //var direccion = '192.168.1.70';
 
 var direccion = 'smart-garden-db.herokuapp.com';
-var puerto = '';
+var puerto = '5000';
 
 export function rutaBase() {
-    return "http://" + direccion + ":" + puerto;
+    //return "http://" + direccion + ":" + puerto;
+    return "http://" + direccion;
 }
