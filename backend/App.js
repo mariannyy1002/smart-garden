@@ -1,7 +1,7 @@
 //ENCABEZADOS Y VARIABLES
 require("dotenv").config();
 var express = require("express"); //Express Web Server
-var cors = require('./cors')
+var cors = require('cors')
 var app = express();
 const mongoose = require("mongoose");
 
@@ -28,7 +28,6 @@ app.use("/historiales", require("./Routes/rutashistoriales"));
 //COMANDO DE EJECUCION DE SERVIDOR
 var PORT = process.env.PORT
 var http = require('http');
-var server = http.Server(app);
 /*var server = app.listen(PORT, function () {
   console.log("Servidor escuchando en el puerto" + PORT);
 });*/
