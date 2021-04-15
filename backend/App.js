@@ -1,7 +1,7 @@
 //ENCABEZADOS Y VARIABLES
 require("dotenv").config();
 var express = require("express"); //Express Web Server
-var cors = require('cors')
+var cors = require('./cors')
 var app = express();
 const mongoose = require("mongoose");
 
