@@ -24,9 +24,12 @@ app.use("/historiales", require("./Routes/rutashistoriales"));
 
 //COMANDO DE EJECUCION DE SERVIDOR
 var PORT = process.env.PORT
+var http = require('http');
+var server = http.Server(app);
+/*
 var server = app.listen(PORT, function () {
   console.log("Servidor escuchando en el puerto" + PORT);
-});
+});*/
 
 // Configurar cabeceras y cors
 app.use(cors());
