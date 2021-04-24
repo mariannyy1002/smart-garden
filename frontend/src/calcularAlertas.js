@@ -1,13 +1,14 @@
 import axios from 'axios';
+import { rutaBase } from '../RutaDB';
 
 export function calcularAlertas() {
     var listaJardines = [];
-    axios.get("http://localhost:5000/jardines/")
+    axios.get(rutaBase() + "/jardines/")
     .then(resJ => {
         listaJardines = resJ.data;
         listaJardines.map(jardin => {
             var listaAreas = [];
-            axios.get("http://localhost:5000/areas/" + jardin._id)
+            axios.get(rutaBase() + "/areas/" + jardin._id)
             .then( area => {
                 listaAreas = area.data;
                 listaAreas.map(disp => {
@@ -16,24 +17,24 @@ export function calcularAlertas() {
                         hum = disp.dispositivo.hum;
                         luz = disp.dispositivo.luz;
                         fechaHora = disp.dispositivo.fechahora;
-                        axios.get("http://localhost:5000/plantaareas/" + disp._id)
+                        axios.get(rutaBase() + "/plantaareas/" + disp._id)
                         .then(resP => {
                             var total = 0;
                             listaPlantas = resP.data;
                             listaPlantas.map(item => {
                                 item.alertas = alertas(item.idhijo, temp, hum, luz);
                                 const datos = { alertas: item.alertas };
-                                axios.patch("http://localhost:5000/plantaareas/" + item._id, {datos});
+                                axios.patch(rutaBase() + "/plantaareas/" + item._id, {datos});
                                 total += item.alertas;
                             });
                             const datos = { alertas: total };
-                            axios.patch("http://localhost:5000/areas/" + disp._id, { datos });
+                            axios.patch(rutaBase() + "/areas/" + disp._id, { datos });
                         });
                 });
                 var total = 0;
                 listaAreas.map(item => { total += item.alertas });
                 const datos = { alertas: total };
-                axios.patch("http://localhost:5000/jardines/" + jardin._id, { datos });
+                axios.patch(rutaBase() + "/jardines/" + jardin._id, { datos });
             });
         });
     });
