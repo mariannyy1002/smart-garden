@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { rutaBase } from '../RutaDB';
+import { rutaBase } from './RutaDB'
 
 export function calcularAlertas() {
     var listaJardines = [];
